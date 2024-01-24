@@ -7,5 +7,6 @@ export default function TypingAnimation() {
     className="h-6"
     sequence={['Convert anything to anything']}
     cursor={false}
+    speed={75}
   />
 }
