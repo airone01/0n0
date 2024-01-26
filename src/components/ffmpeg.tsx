@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMessages: Dispatch<SetStateAction<string>>, setPercent: Dispatch<SetStateAction<number>> }) {
+export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMessages: Dispatch<SetStateAction<string[]>>, setPercent: Dispatch<SetStateAction<number>> }) {
   const [loaded, setLoaded] = useState(false);
   const ffmpegRef = useRef<FFmpeg>(new FFmpeg());
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -15,7 +15,7 @@ export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMes
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
     const ffmpeg = ffmpegRef.current;
     ffmpeg.on('log', ({ message }) => {
-      setFfmpegMessages((oldMessage) => `${oldMessage}\n\n${message}`)
+      setFfmpegMessages((oldMessage) => [...oldMessage, message])
     });
 
     // toBlobURL is used to bypass CORS issue, urls with the same

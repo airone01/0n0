@@ -4,21 +4,15 @@ import TypingAnimation from "@/components/typingAnimation";
 import Ffmpeg from "@/components/ffmpeg";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer";
 import { useState } from "react";
+import { ChevronsUpIcon } from "lucide-react";
 
 export default function HomePage() {
-  const [ffmpegMessages, setFfmpegMessages] = useState('');
+  const [ffmpegMessages, setFfmpegMessages] = useState<string[]>([]);
   const [percent, setPercent] = useState(0);
 
   return (
     <>
-      <Drawer>
-        <DrawerTrigger>Open</DrawerTrigger>
-        <DrawerContent>
-          <DrawerHeader>Ffmpeg.wasm messages</DrawerHeader>
-          <DrawerDescription>{ffmpegMessages}</DrawerDescription>
-        </DrawerContent>
-      </Drawer>
-      <main className="flex min-h-screen flex-col items-center justify-center">
+      <main className="grow flex flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center px-4 py-16">
           <h1 className="cool-title flex just-center items-center">
             NoConverter<RadialLoader percent={percent} />
@@ -27,6 +21,13 @@ export default function HomePage() {
         </div>
         <Ffmpeg setFfmpegMessages={setFfmpegMessages} setPercent={setPercent} />
       </main >
+      <Drawer>
+        <DrawerTrigger className="grow-0"><ChevronsUpIcon /></DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>Ffmpeg.wasm messages</DrawerHeader>
+          <DrawerDescription>{ffmpegMessages.map(message => <><span>{message}</span><br /></>)}</DrawerDescription>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 }
