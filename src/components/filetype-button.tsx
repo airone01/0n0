@@ -1,19 +1,13 @@
 import { FileArchiveIcon, FileAudioIcon, FileCodeIcon, FileIcon, FileImageIcon, FileTextIcon, FileVideoIcon, LucideIcon } from "lucide-react";
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react"
+
+import { AugmentedFileType, FileIcon as StringFileIcon } from "@/ffmpeg-util";
+import { cn } from "@/lib/utils"
 import { Button } from "./ui/button";
 
-type FileIcon = 'text' | 'image' | 'video' | 'audio' | 'archive' | 'code' | 'none';
-type FileIconColor = 'stroke-gray-500' | 'stroke-red-500' | 'stroke-yellow-400' | 'stroke-green-400' | 'stroke-blue-500' | 'stroke-indigo-400' | 'stroke-purple-500' | 'stroke-pink-300';
-
-type Props = {
-  small?: boolean;
-  name: string;
-  description: string;
-  icon: FileIcon;
-  iconColor: FileIconColor;
-  action?: 'CONVERT_TO'
-}
-
-function nameToIcon(name: FileIcon): LucideIcon {
+function nameToIcon(name: StringFileIcon): LucideIcon {
   switch (name) {
     case 'text':
       return FileTextIcon;
@@ -33,21 +27,53 @@ function nameToIcon(name: FileIcon): LucideIcon {
   }
 }
 
-function FileTypeButton({ action, name, description, icon, iconColor }: Props): JSX.Element {
-  const Icon = nameToIcon(icon);
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
 
-  return <Button variant="outline" className="aspect-square h-16 w-16 flex flex-col justify-center items-center gap-1 p-2">
-    <Icon className={`h-6 w-6 text-gray-500 ${iconColor}`} />
-    <h3>{action ? `${action} ` : ''}{name}</h3>
-  </Button>
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  fileType: AugmentedFileType;
+  action?: 'CONVERT_TO',
+  onClick?: () => void;
 }
 
-export const TXT = () => <FileTypeButton name='TXT' description="A text file (sometimes spelled textfile: an old alternate name is flatfile) is a kind of computer file that is structured as a sequence of lines of electronic text." icon="text" iconColor="stroke-gray-500" />;
-export const PDF = () => <FileTypeButton name='PDF' description="A file format used to present and exchange documents reliably, independent of software, hardware, or operating system." icon="text" iconColor="stroke-red-500" />;
-export const JPG = () => <FileTypeButton name='JPG' description="A commonly used method of lossy compression for digital images, particularly for those images produced by digital photography." icon="image" iconColor="stroke-yellow-400" />;
-export const filesObject: Record<string, () => JSX.Element> = {
-  TXT,
-  PDF,
-  JPG,
-};
-export const filesTypes = Object.values(filesObject);
+export const FileTypeButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, fileType: { extension, icon, iconColor }, onClick, action, ...props }, ref) => {
+    const Icon = nameToIcon(icon);
+
+    return (
+      <Button ref={ref} variant={variant} className={cn('outline-foreground outline-2 aspect-square h-16 w-16 flex flex-col justify-center items-center gap-1 p-2 transition-all', className)} {...props} onClick={onClick}>
+        <Icon className={`h-6 w-6 text-gray-500 ${iconColor}`} />
+        <h3>{action ? `${action} ` : ''}{extension}</h3>
+      </Button>
+    );
+  });

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Image from "next/image";
+import { actionsFromFile } from "@/ffmpeg-util";
 
 import { Input } from "./input";
 import { Card, CardContent } from "./card";
 import { Label } from "./label";
+import { FileTypeButton } from "../filetype-button";
+import { Separator } from "./separator";
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 
@@ -64,20 +67,33 @@ function truncateFileName(
 }
 
 function SingleFileCard({ file }: { file: File }) {
-  return <Card className="w-full max-w-md">
-    <CardContent className="flex flex-col items-center gap-4">
-      <Image
-        alt={file.name}
-        src={URL.createObjectURL(file)}
-        width={300}
-        height={300}
-        className="w-full h-full object-contain"
-      />
-      <div className="text-center">
-        <h2 className="text-lg font-semibold">{truncateFileName(file.name, 8, '...', 20)}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{file.type}</p>
-        <p className="text-sm text-gray-500 dark:text-gray-400">600 x 600 pixels</p>
+  const [chosenButton, setChosenButton] = useState<number>(NaN);
+  const fileActions = actionsFromFile(file.type)
+
+  return <div className="flex flex-col justify-center items-center gap-4">
+    <Card className="w-full max-w-md">
+      <CardContent className="flex flex-col items-center gap-4 px-0">
+        <Image
+          alt={file.name}
+          src={URL.createObjectURL(file)}
+          width={300}
+          height={300}
+          className="w-full h-full object-contain rounded-t-xl"
+        />
+        <div className="text-center">
+          <h2 className="text-lg font-semibold">{truncateFileName(file.name, 8, '...', 20)}</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{file.type}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">??? x ??? pixels</p>
+        </div>
+      </CardContent>
+    </Card>
+    <div className="w-96 flex flex-col justify-center items-center gap-4">
+      <h3>Select a format to convert to</h3>
+      <div className="flex flex-wrap justify-center items-center gap-1">
+        {fileActions.map(({ extension }, index) => <FileTypeButton className={index === chosenButton ? 'outline' : ''} variant='outline' key={`action-${extension.extension}`} fileType={extension} onClick={() => {
+          setChosenButton(index);
+        }} />)}
       </div>
-    </CardContent>
-  </Card>
+    </div>
+  </div>
 }

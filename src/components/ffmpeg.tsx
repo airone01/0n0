@@ -5,12 +5,18 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import FileCard from "./ui/file-card";
 
-export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMessages: Dispatch<SetStateAction<string[]>>, setPercent: Dispatch<SetStateAction<number>> }) {
-  const [loaded, setLoaded] = useState(false);
+export default function Ffmpeg({
+  setFfmpegMessages,
+  setPercent
+}: {
+  setFfmpegMessages: Dispatch<SetStateAction<string[]>>,
+  setPercent: Dispatch<SetStateAction<number>>
+}) {
+  const [, setLoaded] = useState(false);
   const ffmpegRef = useRef<FFmpeg>(new FFmpeg());
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const load = async () => {
+  const loadFfmpeg = async () => {
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
     const ffmpeg = ffmpegRef.current;
     ffmpeg.on('log', ({ message }) => {
@@ -45,7 +51,7 @@ export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMes
   }
 
   useEffect(() => {
-    load();
+    loadFfmpeg();
   }, []);
 
   return <>
