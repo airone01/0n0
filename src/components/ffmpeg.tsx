@@ -1,10 +1,9 @@
 'use client';
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import FileCard from "./ui/file-card";
 
 export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMessages: Dispatch<SetStateAction<string[]>>, setPercent: Dispatch<SetStateAction<number>> }) {
   const [loaded, setLoaded] = useState(false);
@@ -50,11 +49,11 @@ export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMes
   }, []);
 
   return <>
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="picture">Upload file or drag and drop here</Label>
-      <Input id="picture" type="file" />
+    <div className="flex flex-col w-96 max-w-sm justify-center items-center gap-1.5">
+      <FileCard />
     </div>
-    {(loaded
+
+    {/* {(loaded
       ? (
         <>
           <video ref={videoRef} controls></video><br />
@@ -62,6 +61,6 @@ export default function Ffmpeg({ setFfmpegMessages, setPercent }: { setFfmpegMes
           <p>Open Developer Tools (Ctrl+Shift+I) to View Logs</p>
         </>
       ) : undefined
-    )}
+    )} */}
   </>
 }
