@@ -7,6 +7,7 @@ import { Card, CardContent } from "./card";
 import { Label } from "./label";
 import { FileTypeButton } from "../filetype-button";
 import { Separator } from "./separator";
+import { Button } from "./button";
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 
@@ -94,6 +95,8 @@ function SingleFileCard({ file }: { file: File }) {
           setChosenButton(index);
         }} />)}
       </div>
+      <h3>And hit this button!</h3>
+      <Button variant='destructive' className='bg-green-700 hover:bg-green-600'>Convert</Button>
     </div>
   </div>
 }
