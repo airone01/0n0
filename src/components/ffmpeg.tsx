@@ -2,8 +2,11 @@
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { toBlobURL } from "@ffmpeg/util";
+
+import { AugmentedFileType } from "@/ffmpeg-util";
 import FileCard from "./ui/file-card";
+import { Button } from "./ui/button";
 
 export default function Ffmpeg({
   setFfmpegMessages,
@@ -12,13 +15,17 @@ export default function Ffmpeg({
   setFfmpegMessages: Dispatch<SetStateAction<string[]>>,
   setPercent: Dispatch<SetStateAction<number>>
 }) {
-  const [, setLoaded] = useState(false);
-  const ffmpegRef = useRef<FFmpeg>(new FFmpeg());
+  const [file, setFile] = useState<File | null>(null);
+  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
+  const [fileLoaded, setFileLoaded] = useState(false);
+  const [transcodedData, setTranscodedData] = useState<Blob | null>(null);
+  const [outputFileName, setOutputFileName] = useState<string | null>(null);
+  const [chosenAugmentedFileType, setChosenAugmentedFileType] = useState<AugmentedFileType | null>(null);
+  const { current: ffmpeg } = useRef<FFmpeg>(new FFmpeg());
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const loadFfmpeg = async () => {
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
-    const ffmpeg = ffmpegRef.current;
     ffmpeg.on('log', ({ message }) => {
       setFfmpegMessages((oldMessage) => [...oldMessage, message])
     });
@@ -33,22 +40,52 @@ export default function Ffmpeg({
         })
       })
     } catch (error) {
-
+      console.error(error);
+      setPercent(0);
+      return;
     }
     setPercent(100);
-    setLoaded(true);
+    setFfmpegLoaded(true);
   }
 
   const transcode = async () => {
-    const ffmpeg = ffmpegRef.current;
-    await ffmpeg.writeFile('input.webm', await fetchFile('https://raw.githubusercontent.com/ffmpegwasm/testdata/master/Big_Buck_Bunny_180_10s.webm'));
-    await ffmpeg.exec(['-i', 'input.webm', 'output.mp4']);
-    const data = await ffmpeg.readFile('output.mp4');
-    if (videoRef.current !== null) {
-      videoRef.current.src =
-        URL.createObjectURL(new Blob([data], { type: 'video/mp4' }));
+    const myOutputFileName = `output_file.${chosenAugmentedFileType?.extension!.toLowerCase()}`;
+    setOutputFileName(myOutputFileName);
+    try {
+      const test = await ffmpeg.exec(['-i', 'input_file.webp', myOutputFileName]);
+      console.log('test', test)
+    } catch {
+      console.log('CRASHED 1')
+    }
+    try {
+      const data = await ffmpeg.readFile(myOutputFileName);
+      console.log('data', data)
+      setTranscodedData(new Blob([data], { type: chosenAugmentedFileType?.mimeType }));
+    } catch {
+      console.log('CRASHED 2');
     }
   }
+
+  useEffect(() => {
+    new Promise<void>((resolve) => {
+      if (file === null) {
+        console.log('no file')
+        return;
+      };
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const fileData = new Uint8Array(reader.result as ArrayBuffer);
+        await ffmpeg.writeFile('input_file.webp', fileData);
+        resolve();
+      }
+      reader.readAsArrayBuffer(file);
+    }).then(() => {
+      setFileLoaded(true);
+      console.log('loading file: done.');
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, [file])
 
   useEffect(() => {
     loadFfmpeg();
@@ -56,8 +93,11 @@ export default function Ffmpeg({
 
   return <>
     <div className="flex flex-col w-96 max-w-sm justify-center items-center gap-1.5">
-      <FileCard />
+      <FileCard stateAugmentedFileType={[chosenAugmentedFileType, setChosenAugmentedFileType]} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} setFile={setFile} />
     </div>
+
+    {transcodedData !== null ?
+      <a href={URL.createObjectURL(transcodedData)} target="_blank" rel="noopener noreferrer" download={outputFileName}><Button>{transcodedData === null ? '...' : 'Download file'}</Button></a> : <></>}
 
     {/* {(loaded
       ? (

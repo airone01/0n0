@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
-import { actionsFromFile } from "@/ffmpeg-util";
+import { AugmentedFileType, actionsFromFile } from "@/ffmpeg-util";
 
 import { Input } from "./input";
 import { Card, CardContent } from "./card";
 import { Label } from "./label";
 import { FileTypeButton } from "../filetype-button";
-import { Separator } from "./separator";
 import { Button } from "./button";
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 
-export default function FileCard() {
+export default function FileCard({ setFile, fileLoaded, transcode, stateAugmentedFileType }: {
+  setFile: Dispatch<SetStateAction<File | null>>,
+  fileLoaded: boolean,
+  transcode: () => void,
+  stateAugmentedFileType: [AugmentedFileType | null, Dispatch<SetStateAction<AugmentedFileType | null>>]
+}) {
   const [fileMode, setFileMode] = useState<FileMode>('none');
   const [files, setFiles] = useState<File[]>([]);
 
@@ -28,6 +32,7 @@ export default function FileCard() {
 
     if (files.length === 1) {
       setFileMode('single');
+      setFile(files[0]!);
     }
 
     if (files.length > 1) {
@@ -37,7 +42,7 @@ export default function FileCard() {
 
   switch (fileMode) {
     case 'single':
-      return <SingleFileCard file={files[0]!} />;
+      return <SingleFileCard stateAugmentedFileType={stateAugmentedFileType} transcode={transcode} fileLoaded={fileLoaded} file={files[0]!} />;
 
     case 'multiple':
       return <div>Multiple files</div>;
@@ -67,8 +72,8 @@ function truncateFileName(
   );
 }
 
-function SingleFileCard({ file }: { file: File }) {
-  const [chosenButton, setChosenButton] = useState<number>(NaN);
+function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }: { file: File, fileLoaded: boolean, transcode: () => void, stateAugmentedFileType: [AugmentedFileType | null, Dispatch<SetStateAction<AugmentedFileType | null>>] }) {
+  const [chosenAugmentedFileType, setChosenAugmentedFileType] = stateAugmentedFileType;
   const fileActions = actionsFromFile(file.type)
 
   return <div className="flex flex-col justify-center items-center gap-4">
@@ -91,12 +96,12 @@ function SingleFileCard({ file }: { file: File }) {
     <div className="w-96 flex flex-col justify-center items-center gap-4">
       <h3>Select a format to convert to</h3>
       <div className="flex flex-wrap justify-center items-center gap-1">
-        {fileActions.map(({ extension }, index) => <FileTypeButton className={index === chosenButton ? 'outline' : ''} variant='outline' key={`action-${extension.extension}`} fileType={extension} onClick={() => {
-          setChosenButton(index);
+        {fileActions.map(({ extension }, index) => <FileTypeButton className={extension === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${extension.extension}-${index}`} fileType={extension} onClick={() => {
+          setChosenAugmentedFileType(extension);
         }} />)}
       </div>
       <h3>And hit this button!</h3>
-      <Button variant='destructive' className='bg-green-700 hover:bg-green-600'>Convert</Button>
+      <Button disabled={!fileLoaded} variant='destructive' className='bg-green-700 hover:bg-green-600' onClick={transcode}>{fileLoaded ? 'Convert!' : 'Loading...'}</Button>
     </div>
   </div>
 }
