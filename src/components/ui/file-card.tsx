@@ -76,6 +76,7 @@ function truncateFileName(
 function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }: { file: File, fileLoaded: boolean, transcode: () => void, stateAugmentedFileType: [AugmentedFileType | null, Dispatch<SetStateAction<AugmentedFileType | null>>] }) {
   const [chosenAugmentedFileType, setChosenAugmentedFileType] = stateAugmentedFileType;
   const fileActions = actionsFromFile(file.type)
+  const [widthHeight, setWidthHeight] = useState<[number | undefined, number | undefined]>([undefined, undefined]);
 
   return <div className="flex flex-col justify-center items-center gap-4">
     <Card className="w-full max-w-md">
@@ -89,13 +90,14 @@ function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }:
             className="w-full h-full object-contain rounded-t-xl"
           /> :
           file.type.startsWith('video') ?
-            <MyMediaPlayer file={file} />
+            <MyMediaPlayer file={file} setWidthHeight={setWidthHeight} />
             : 'Unknown file type'
         }
         <div className="text-center">
           <h2 className="text-lg font-semibold">{truncateFileName(file.name, 8, '...', 20)}</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">{file.type}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">??? x ??? pixels</p>
+          {widthHeight[0] === undefined ? '' :
+            <p className="text-sm text-gray-500 dark:text-gray-400">{widthHeight[0]} x {widthHeight[1]} pixels</p>}
         </div>
       </CardContent>
     </Card>
