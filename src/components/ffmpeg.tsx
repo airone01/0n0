@@ -52,7 +52,7 @@ export default function Ffmpeg({
     const myOutputFileName = `output_file.${chosenAugmentedFileType?.extension!.toLowerCase()}`;
     setOutputFileName(myOutputFileName);
     try {
-      const test = await ffmpeg.exec(['-i', 'input_file.webp', myOutputFileName]);
+      const test = await ffmpeg.exec(['-i', 'input_file', myOutputFileName]);
       console.log('test', test)
     } catch {
       console.log('CRASHED 1')
@@ -69,13 +69,12 @@ export default function Ffmpeg({
   useEffect(() => {
     new Promise<void>((resolve) => {
       if (file === null) {
-        console.log('no file')
         return;
       };
       const reader = new FileReader();
       reader.onload = async () => {
         const fileData = new Uint8Array(reader.result as ArrayBuffer);
-        await ffmpeg.writeFile('input_file.webp', fileData);
+        await ffmpeg.writeFile('input_file', fileData);
         resolve();
       }
       reader.readAsArrayBuffer(file);

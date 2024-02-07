@@ -7,6 +7,7 @@ import { Card, CardContent } from "./card";
 import { Label } from "./label";
 import { FileTypeButton } from "../filetype-button";
 import { Button } from "./button";
+import MyMediaPlayer from "./media-player";
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 
@@ -79,13 +80,18 @@ function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }:
   return <div className="flex flex-col justify-center items-center gap-4">
     <Card className="w-full max-w-md">
       <CardContent className="flex flex-col items-center gap-4 px-0">
-        <Image
-          alt={file.name}
-          src={URL.createObjectURL(file)}
-          width={300}
-          height={300}
-          className="w-full h-full object-contain rounded-t-xl"
-        />
+        {file.type.startsWith('image') ?
+          <Image
+            alt={file.name}
+            src={URL.createObjectURL(file)}
+            width={300}
+            height={300}
+            className="w-full h-full object-contain rounded-t-xl"
+          /> :
+          file.type.startsWith('video') ?
+            <MyMediaPlayer file={file} />
+            : 'Unknown file type'
+        }
         <div className="text-center">
           <h2 className="text-lg font-semibold">{truncateFileName(file.name, 8, '...', 20)}</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">{file.type}</p>
@@ -103,5 +109,5 @@ function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }:
       <h3>And hit this button!</h3>
       <Button disabled={!fileLoaded} variant='destructive' className='bg-green-700 hover:bg-green-600' onClick={transcode}>{fileLoaded ? 'Convert!' : 'Loading...'}</Button>
     </div>
-  </div>
+  </div >
 }
