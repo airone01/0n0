@@ -3,26 +3,31 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
+import { PrimitiveAtom, useAtom } from "jotai";
 
 import { AugmentedFileType } from "@/ffmpeg-util";
 import FileCard from "./ui/file-card";
 import { Button } from "./ui/button";
 
+type Props = {
+  setFfmpegMessages: Dispatch<SetStateAction<string[]>>,
+  percentAtom: PrimitiveAtom<number>
+};
+
 export default function Ffmpeg({
   setFfmpegMessages,
-  setPercent
-}: {
-  setFfmpegMessages: Dispatch<SetStateAction<string[]>>,
-  setPercent: Dispatch<SetStateAction<number>>
-}) {
+  percentAtom
+}: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const [fileLoaded, setFileLoaded] = useState(false);
   const [transcodedData, setTranscodedData] = useState<Blob | null>(null);
   const [outputFileName, setOutputFileName] = useState<string | null>(null);
   const [chosenAugmentedFileType, setChosenAugmentedFileType] = useState<AugmentedFileType | null>(null);
+
+  const [, setPercent] = useAtom(percentAtom);
+
   const { current: ffmpeg } = useRef<FFmpeg>(new FFmpeg());
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const loadFfmpeg = async () => {
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'

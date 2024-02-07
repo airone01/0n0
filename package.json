@@ -24,6 +24,7 @@
     "@vidstack/react": "next",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "jotai": "^2.6.4",
     "lucide-react": "^0.316.0",
     "next": "^14.0.4",
     "next-themes": "^0.2.1",
