@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <>
       <main className="grow flex flex-col items-center justify-center">
-        <div className="container flex flex-col items-center justify-center px-4 py-16">
+        <div className="container flex flex-col items-center justify-center p-4 pt-16">
           <h1 className="cool-title flex just-center items-center">
             NoConverter<RadialLoader percentAtom={percentAtom} />
           </h1>
