@@ -5,13 +5,14 @@ import Ffmpeg from "@/components/ffmpeg";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer";
 import { RadialLoader } from "@/components/ui/radial-loader";
 
-import { useState } from "react";
-import { atom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { ChevronsUpIcon } from "lucide-react";
 
+const percentAtom = atom(0);
+const ffmpegMessagesAtom = atom<string[]>([]);
+
 export default function HomePage() {
-  const [ffmpegMessages, setFfmpegMessages] = useState<string[]>([]);
-  const percentAtom = atom(0);
+  const [ffmpegMessages] = useAtom(ffmpegMessagesAtom);
 
   return (
     <>
@@ -22,7 +23,7 @@ export default function HomePage() {
           </h1>
           <TypingAnimation />
         </div>
-        <Ffmpeg setFfmpegMessages={setFfmpegMessages} percentAtom={percentAtom} />
+        <Ffmpeg ffmpegMessagesAtom={ffmpegMessagesAtom} percentAtom={percentAtom} />
       </main >
       <Drawer>
         <DrawerTrigger className="grow-0"><ChevronsUpIcon /></DrawerTrigger>

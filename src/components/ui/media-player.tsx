@@ -4,21 +4,24 @@ import '@vidstack/react/player/styles/default/time.css';
 
 import { FullscreenIcon, PauseIcon, PlayIcon, Volume1Icon, Volume2Icon, VolumeIcon, VolumeXIcon } from "lucide-react";
 import { MediaPlayer, MediaProvider, PlayButton, MediaPlayerInstance, useStore, FullscreenButton, VolumeSlider } from "@vidstack/react";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { TimeSlider } from '@vidstack/react';
 import { Time } from '@vidstack/react';
 import { Button } from './button';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
+import { atom, useAtom } from 'jotai';
 
 type Props = {
   file: File,
   setWidthHeight: Dispatch<SetStateAction<[number | undefined, number | undefined]>>,
 }
 
+const startedOnceAtom = atom(false);
+
 export default function MyMediaPlayer({ file, setWidthHeight }: Props) {
   const ref = useRef<MediaPlayerInstance>(null);
   const { paused, canFullscreen, volume, mediaHeight, mediaWidth } = useStore(MediaPlayerInstance, ref);
-  const [startedOnce, setStartedOnce] = useState(false);
+  const [startedOnce, setStartedOnce] = useAtom(startedOnceAtom);
 
   useEffect(() => {
     setWidthHeight([mediaWidth, mediaHeight])

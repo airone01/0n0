@@ -1,30 +1,37 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL } from "@ffmpeg/util";
-import { PrimitiveAtom, useAtom } from "jotai";
+import { PrimitiveAtom, atom, useAtom } from "jotai";
 
 import { AugmentedFileType } from "@/ffmpeg-util";
 import FileCard from "./ui/file-card";
 import { Button } from "./ui/button";
 
 type Props = {
-  setFfmpegMessages: Dispatch<SetStateAction<string[]>>,
+  ffmpegMessagesAtom: PrimitiveAtom<string[]>,
   percentAtom: PrimitiveAtom<number>
 };
 
+const fileAtom = atom<File | undefined>(undefined);
+const ffmpegLoadedAtom = atom(false);
+const fileLoadedAtom = atom(false);
+const transcodedDataAtom = atom<Blob | null>(null);
+const outputFileNameAtom = atom<string | null>(null);
+const chosenAugmentedFileTypeAtom = atom<AugmentedFileType | null>(null);
+
 export default function Ffmpeg({
-  setFfmpegMessages,
+  ffmpegMessagesAtom,
   percentAtom
 }: Props) {
-  const [file, setFile] = useState<File | null>(null);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
-  const [fileLoaded, setFileLoaded] = useState(false);
-  const [transcodedData, setTranscodedData] = useState<Blob | null>(null);
-  const [outputFileName, setOutputFileName] = useState<string | null>(null);
-  const [chosenAugmentedFileType, setChosenAugmentedFileType] = useState<AugmentedFileType | null>(null);
-
+  const [file] = useAtom(fileAtom);
+  const [ffmpegLoaded, setFfmpegLoaded] = useAtom(ffmpegLoadedAtom);
+  const [fileLoaded, setFileLoaded] = useAtom(fileLoadedAtom);
+  const [transcodedData, setTranscodedData] = useAtom(transcodedDataAtom);
+  const [outputFileName, setOutputFileName] = useAtom(outputFileNameAtom);
+  const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(chosenAugmentedFileTypeAtom);
+  const [, setFfmpegMessages] = useAtom(ffmpegMessagesAtom);
   const [, setPercent] = useAtom(percentAtom);
 
   const { current: ffmpeg } = useRef<FFmpeg>(new FFmpeg());
@@ -73,7 +80,7 @@ export default function Ffmpeg({
 
   useEffect(() => {
     new Promise<void>((resolve) => {
-      if (file === null) {
+      if (file === undefined) {
         return;
       };
       const reader = new FileReader();
@@ -97,7 +104,7 @@ export default function Ffmpeg({
 
   return <>
     <div className="flex flex-col w-96 max-w-sm justify-center items-center gap-1.5">
-      <FileCard stateAugmentedFileType={[chosenAugmentedFileType, setChosenAugmentedFileType]} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} setFile={setFile} />
+      <FileCard stateAugmentedFileType={[chosenAugmentedFileType, setChosenAugmentedFileType]} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} fileAtom={fileAtom} />
     </div>
 
     {transcodedData !== null ?

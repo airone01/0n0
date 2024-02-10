@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { AugmentedFileType, actionsFromFile } from "@/ffmpeg-util";
 
@@ -8,17 +8,23 @@ import { Label } from "./label";
 import { FileTypeButton } from "../filetype-button";
 import { Button } from "./button";
 import MyMediaPlayer from "./media-player";
+import { PrimitiveAtom, atom, useAtom } from "jotai";
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
-
-export default function FileCard({ setFile, fileLoaded, transcode, stateAugmentedFileType }: {
-  setFile: Dispatch<SetStateAction<File | null>>,
+type Props = {
+  fileAtom: PrimitiveAtom<File | undefined>,
   fileLoaded: boolean,
   transcode: () => void,
   stateAugmentedFileType: [AugmentedFileType | null, Dispatch<SetStateAction<AugmentedFileType | null>>]
-}) {
-  const [fileMode, setFileMode] = useState<FileMode>('none');
-  const [files, setFiles] = useState<File[]>([]);
+};
+
+const filesAtom = atom<File[]>([]);
+const fileModeAtom = atom<FileMode>('none');
+
+export default function FileCard({ fileAtom, fileLoaded, transcode, stateAugmentedFileType }: Props) {
+  const [fileMode, setFileMode] = useAtom(fileModeAtom);
+  const [files, setFiles] = useAtom(filesAtom);
+  const [file, setFile] = useAtom(fileAtom);
 
   const onFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -73,10 +79,12 @@ function truncateFileName(
   );
 }
 
+const widthHeightAtom = atom<[number | undefined, number | undefined]>([undefined, undefined]);
+
 function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }: { file: File, fileLoaded: boolean, transcode: () => void, stateAugmentedFileType: [AugmentedFileType | null, Dispatch<SetStateAction<AugmentedFileType | null>>] }) {
   const [chosenAugmentedFileType, setChosenAugmentedFileType] = stateAugmentedFileType;
   const fileActions = actionsFromFile(file.type)
-  const [widthHeight, setWidthHeight] = useState<[number | undefined, number | undefined]>([undefined, undefined]);
+  const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
 
   return <div className="flex flex-col justify-center items-center gap-4">
     <Card className="w-full max-w-md">
