@@ -24,7 +24,7 @@ const fileModeAtom = atom<FileMode>('none');
 export default function FileCard({ fileAtom, fileLoaded, transcode, stateAugmentedFileType }: Props) {
   const [fileMode, setFileMode] = useAtom(fileModeAtom);
   const [files, setFiles] = useAtom(filesAtom);
-  const [file, setFile] = useAtom(fileAtom);
+  const [, setFile] = useAtom(fileAtom);
 
   const onFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -63,22 +63,6 @@ export default function FileCard({ fileAtom, fileLoaded, transcode, stateAugment
   }
 }
 
-function truncateFileName(
-  fullStr: string,
-  strLen: number = 8,
-  separator: string = "...",
-  frontChars: number = 3,
-  backChars: number = 4
-) {
-  if (fullStr.length <= strLen) return fullStr;
-
-  return (
-    fullStr.substr(0, frontChars) +
-    separator +
-    fullStr.substr(fullStr.length - backChars)
-  );
-}
-
 const widthHeightAtom = atom<[number | undefined, number | undefined]>([undefined, undefined]);
 
 function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }: { file: File, fileLoaded: boolean, transcode: () => void, stateAugmentedFileType: [AugmentedFileType | null, Dispatch<SetStateAction<AugmentedFileType | null>>] }) {
@@ -101,8 +85,8 @@ function SingleFileCard({ file, fileLoaded, transcode, stateAugmentedFileType }:
             <MyMediaPlayer file={file} setWidthHeight={setWidthHeight} />
             : 'Unknown file type'
         }
-        <div className="text-center">
-          <h2 className="text-lg font-semibold">{truncateFileName(file.name, 8, '...', 20)}</h2>
+        <div className="text-center w-full">
+          <p className="text-lg font-semibold w-full px-2 truncate">{file.name}</p>
           <p className="text-sm text-gray-500 dark:text-gray-400">{file.type}</p>
           {widthHeight[0] === undefined ? '' :
             <p className="text-sm text-gray-500 dark:text-gray-400">{widthHeight[0]} x {widthHeight[1]} pixels</p>}
