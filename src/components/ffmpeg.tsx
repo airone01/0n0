@@ -18,8 +18,8 @@ const fileAtom = atom<File | undefined>(undefined);
 const ffmpegLoadedAtom = atom(false);
 const fileLoadedAtom = atom(false);
 const transcodedDataAtom = atom<Blob | null>(null);
-const outputFileNameAtom = atom<string | null>(null);
-const chosenAugmentedFileTypeAtom = atom<AugmentedFileType | null>(null);
+const outputFileNameAtom = atom<string | undefined>(undefined);
+const chosenAugmentedFileTypeAtom = atom<AugmentedFileType | undefined>(undefined);
 
 export default function Ffmpeg({
   ffmpegMessagesAtom,
@@ -30,7 +30,7 @@ export default function Ffmpeg({
   const [fileLoaded, setFileLoaded] = useAtom(fileLoadedAtom);
   const [transcodedData, setTranscodedData] = useAtom(transcodedDataAtom);
   const [outputFileName, setOutputFileName] = useAtom(outputFileNameAtom);
-  const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(chosenAugmentedFileTypeAtom);
+  const [chosenAugmentedFileType] = useAtom(chosenAugmentedFileTypeAtom);
   const [, setFfmpegMessages] = useAtom(ffmpegMessagesAtom);
   const [, setPercent] = useAtom(percentAtom);
 
@@ -104,20 +104,10 @@ export default function Ffmpeg({
 
   return <>
     <div className="flex flex-col w-96 max-w-sm justify-center items-center gap-1.5">
-      <FileCard stateAugmentedFileType={[chosenAugmentedFileType, setChosenAugmentedFileType]} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} fileAtom={fileAtom} />
+      <FileCard augmentedFileTypeAtom={chosenAugmentedFileTypeAtom} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} fileAtom={fileAtom} />
     </div>
 
     {transcodedData !== null ?
       <a href={URL.createObjectURL(transcodedData)} target="_blank" rel="noopener noreferrer" download={outputFileName}><Button>{transcodedData === null ? '...' : 'Download file'}</Button></a> : <></>}
-
-    {/* {(loaded
-      ? (
-        <>
-          <video ref={videoRef} controls></video><br />
-          <button onClick={transcode}>Transcode webm to mp4</button>
-          <p>Open Developer Tools (Ctrl+Shift+I) to View Logs</p>
-        </>
-      ) : undefined
-    )} */}
   </>
 }
