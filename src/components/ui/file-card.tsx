@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { AugmentedFileType, actionsFromFile } from "@/ffmpeg-util";
 import { PrimitiveAtom, atom, useAtom } from "jotai";
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 
 import { Input } from "./input";
 import { Card, CardContent } from "./card";
@@ -17,7 +16,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { useEffect } from "react";
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 type Props = {
