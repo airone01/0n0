@@ -9,6 +9,17 @@ import { AugmentedFileType } from "@/ffmpeg-util";
 import FileCard from "./ui/file-card";
 import { Button } from "./ui/button";
 
+function newFfmpegNoNodeError() {
+  try {
+    return new FFmpeg();
+  } catch (e: unknown) {
+    if (e instanceof Error && e.message === 'ffmpeg.wasm does not support nodejs') {
+    } else {
+      throw e;
+    }
+  }
+}
+
 type Props = {
   ffmpegMessagesAtom: PrimitiveAtom<string[]>,
   percentAtom: PrimitiveAtom<number>
@@ -34,7 +45,7 @@ export default function Ffmpeg({
   const [, setFfmpegMessages] = useAtom(ffmpegMessagesAtom);
   const [, setPercent] = useAtom(percentAtom);
 
-  const { current: ffmpeg } = useRef<FFmpeg>(new FFmpeg());
+  const { current: ffmpeg } = useRef<FFmpeg>(newFfmpegNoNodeError()!);
 
   const loadFfmpeg = async () => {
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
@@ -111,3 +122,4 @@ export default function Ffmpeg({
       <a href={URL.createObjectURL(transcodedData)} target="_blank" rel="noopener noreferrer" download={outputFileName}><Button>{transcodedData === null ? '...' : 'Download file'}</Button></a> : <></>}
   </>
 }
+
