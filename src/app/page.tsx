@@ -29,7 +29,7 @@ export default function HomePage() {
         <DrawerTrigger className="grow-0"><ChevronsUpIcon /></DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>Ffmpeg.wasm messages</DrawerHeader>
-          <DrawerDescription>{ffmpegMessages.map(message => <><span>{message}</span><br /></>)}</DrawerDescription>
+          <DrawerDescription>{ffmpegMessages.map((message, index) => <span key={`ffmpeg-msg-${index}`}>{message}<br /></span>)}</DrawerDescription>
         </DrawerContent>
       </Drawer>
     </>
