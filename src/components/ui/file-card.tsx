@@ -15,7 +15,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "./carousel"
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 type Props = {
@@ -26,12 +26,9 @@ type Props = {
 };
 
 const widthHeightAtom = atom<[number | undefined, number | undefined]>([undefined, undefined]);
-const fileIndexAtom = atom(0);
 const fileModeAtom = atom<FileMode>('none');
 const filesAtom = atom<File[]>([]);
 const carouselAtom = atom<CarouselApi | undefined>(undefined);
-const countAtom = atom(0);
-const currentAtom = atom(0);
 
 export default function FileCard({ fileAtom, fileLoaded, transcode, augmentedFileTypeAtom }: Props) {
   const [fileMode, setFileMode] = useAtom(fileModeAtom);
@@ -83,8 +80,9 @@ type SingleFileCardParams = {
 };
 function SingleFileCard({ file, fileLoaded, transcode, augmentedFileTypeAtom }: SingleFileCardParams) {
   const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(augmentedFileTypeAtom);
-  const fileActions = actionsFromFile(file.type)
   const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
+
+  const fileActions = actionsFromFile(file)
 
   return <div className="flex flex-col justify-center items-center gap-4">
     <Card className="w-full max-w-md">
@@ -112,8 +110,8 @@ function SingleFileCard({ file, fileLoaded, transcode, augmentedFileTypeAtom }: 
     <div className="w-96 flex flex-col justify-center items-center gap-4">
       <h3>Select a format to convert to</h3>
       <div className="flex flex-wrap justify-center items-center gap-1">
-        {fileActions.map(({ extension }, index) => <FileTypeButton className={extension === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${extension.extension}-${index}`} fileType={extension} onClick={() => {
-          setChosenAugmentedFileType(extension);
+        {fileActions.map(({ format }, index) => <FileTypeButton className={format === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${format.extension}-${index}`} fileType={format} onClick={() => {
+          setChosenAugmentedFileType(format);
         }} />)}
       </div>
       <h3>And hit this button!</h3>
@@ -130,9 +128,9 @@ type MultipleFileCardsParams = {
 function MultipleFileCards({ files, augmentedFileTypeAtom, transcode }: MultipleFileCardsParams) {
   const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(augmentedFileTypeAtom);
   const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
-  const [fileIndex, setFileIndex] = useAtom(fileIndexAtom);
-  const fileActions = actionsFromFile(files[0]!.type)
   const [, setApi] = useAtom(carouselAtom);
+
+  const fileActions = actionsFromFile(files[0]!); // TODO: add logick here
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -178,8 +176,8 @@ function MultipleFileCards({ files, augmentedFileTypeAtom, transcode }: Multiple
       <div className="w-96 flex flex-col justify-center items-center gap-4">
         <h3>Select a format to convert to</h3>
         <div className="flex flex-wrap justify-center items-center gap-1">
-          {fileActions.map(({ extension }, index) => <FileTypeButton className={extension === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${extension.extension}-${index}`} fileType={extension} onClick={() => {
-            setChosenAugmentedFileType(extension);
+          {fileActions.map(({ format }, index) => <FileTypeButton className={format === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${format.extension}-${index}`} fileType={format} onClick={() => {
+            setChosenAugmentedFileType(format);
           }} />)}
         </div>
         <h3>And hit this button!</h3>
