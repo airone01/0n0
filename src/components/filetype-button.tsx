@@ -77,3 +77,4 @@ export const FileTypeButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       </Button>
     );
   });
+FileTypeButton.displayName = 'FileTypeButton'

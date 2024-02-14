@@ -357,14 +357,9 @@ export const fileHierarchy: Record<Category, {
 };
 
 /**
- * Actions possible to achieve from an image
-*/
-export type ActionFromImage = 'ToStaticPng' | 'ToJpg' | 'ToAvif' | 'ToIco' | 'ToWebm' | 'ToGif' | 'TransfertToPdf';
-
-/**
  * Image file types
  */
-type ImageFileType = 'PNG' | 'JPG' | 'AVIF' | 'ICO' | 'GIF' | 'WEBP' | 'AVIF';
+type ImageFileType = 'PNG' | 'JPG' | 'AVIF' | 'ICO' | 'GIF' | 'WEBP';
 /**
  * Animated image file types
  */

@@ -48,7 +48,7 @@ export default function FileCard({ fileAtom, fileLoaded, transcode, augmentedFil
 
     if (files.length === 1) {
       setFileMode('single');
-      setFile(files[0]!);
+      setFile(files[0]);
     }
 
     if (files.length > 1) {
@@ -139,8 +139,8 @@ function MultipleFileCards({ files, augmentedFileTypeAtom, transcode }: Multiple
         className="max-w-md"
       >
         <CarouselContent>
-          {files.map(file =>
-            <CarouselItem>
+          {files.map((file, index) =>
+            <CarouselItem key={`carousel-file-${index}`}>
               <div className="flex justify-center items-center p-2">
                 <Card className="w-full">
                   <CardContent className="flex flex-col items-center gap-4 select-none">

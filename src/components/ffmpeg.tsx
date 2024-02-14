@@ -99,7 +99,7 @@ export default function Ffmpeg({
   }, [file])
 
   useEffect(() => {
-    loadFfmpeg();
+    void loadFfmpeg();
   }, []);
 
   return <>
