@@ -4,7 +4,8 @@ import {useEffect, useRef} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {toBlobURL} from '@ffmpeg/util';
 import {type PrimitiveAtom, atom, useAtom} from 'jotai';
-import FileCard from '@/ui/file-card';
+import FileCard from './ui/files-card';
+import InputCard from '~/components/ui/input-card';
 import {Button} from '@/ui/button';
 import {type AugmentedFileType} from '~/ffmpeg-util';
 
@@ -114,8 +115,9 @@ export default function Ffmpeg({
 	}, []);
 
 	return <>
-		<div className='flex flex-col w-96 max-w-sm justify-center items-center gap-1.5'>
-			<FileCard filesAtom={filesAtom} augmentedFileTypeAtom={chosenAugmentedFileTypeAtom} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} />
+		<div className='flex flex-col w-96 max-w-sm justify-center items-center gap-2'>
+			<InputCard filesAtom={filesAtom} />
+			{files.length > 0 ? <FileCard files={files} /> : undefined}
 		</div>
 
 		{transcodedData === null || transcodedData === undefined

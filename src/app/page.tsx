@@ -20,7 +20,7 @@ export default function HomePage() {
 
 	return (
 		<>
-			<main className='grow flex flex-col items-center justify-start gap-8'>
+			<main className='grow flex flex-col items-center justify-start gap-4'>
 				<Title />
 				<Ffmpeg ffmpegMessagesAtom={ffmpegMessagesAtom} percentAtom={percentAtom} />
 			</main >
@@ -43,7 +43,7 @@ const libreFranklin = Libre_Franklin({
 
 const Title = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
 	({className, ...properties}, reference) =>
-		<div ref={reference} className={cn(libreFranklin.className, 'container flex flex-col items-center justify-center p-8 pt-12', className)} {...properties}>
+		<div ref={reference} className={cn(libreFranklin.className, 'container flex flex-col items-center justify-center py-4', className)} {...properties}>
 			<div className='flex just-center items-center'>
 				<h1 className='text-6xl font-extrabold'>NoConverter</h1>
 				<RadialLoader percentAtom={percentAtom} />

@@ -8,21 +8,20 @@ import {
 	MediaPlayer, MediaProvider, PlayButton, MediaPlayerInstance, useStore, FullscreenButton, VolumeSlider,
 	TimeSlider, Time,
 } from '@vidstack/react';
-import {
-	type Dispatch, type SetStateAction, useEffect, useRef,
-} from 'react';
-import {atom, useAtom} from 'jotai';
+import {useEffect, useRef} from 'react';
+import {type PrimitiveAtom, atom, useAtom} from 'jotai';
 import {Button} from './button';
 import {Popover, PopoverContent, PopoverTrigger} from './popover';
 
 type Properties = {
 	file: File;
-	setWidthHeight: Dispatch<SetStateAction<[number | undefined, number | undefined]>>;
+	widthHeightAtom: PrimitiveAtom<[number | undefined, number | undefined]>;
 };
 
 const startedOnceAtom = atom(false);
 
-export default function MyMediaPlayer({file, setWidthHeight}: Properties) {
+export default function MyMediaPlayer({file, widthHeightAtom}: Properties) {
+	const [, setWidthHeight] = useAtom(widthHeightAtom);
 	const reference = useRef<MediaPlayerInstance>(null);
 	const {paused, canFullscreen, volume, mediaHeight, mediaWidth} = useStore(MediaPlayerInstance, reference);
 	const [startedOnce, setStartedOnce] = useAtom(startedOnceAtom);
