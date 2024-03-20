@@ -116,6 +116,7 @@ const FileElement = forwardRef<HTMLDivElement, FileElementProperties>(
 		</div>;
 	},
 );
+FileElement.displayName = 'FileElement';
 
 type SingleFileHeaderProperties = {
 	file: File;
@@ -146,6 +147,7 @@ const SingleFileHeader = forwardRef<HTMLDivElement, SingleFileHeaderProperties>(
 		</>;
 	},
 );
+SingleFileHeader.displayName = 'SingleFileHeader';
 
 type SingleFileFooterProperties = {
 	file: File;
@@ -170,6 +172,7 @@ const SingleFileFooter = forwardRef<HTMLDivElement, SingleFileFooterProperties>(
 		</div>;
 	},
 );
+SingleFileFooter.displayName = 'SingleFileFooter';
 
 type MultipleFileHeaderProperties = {
 	files: File[];
@@ -221,6 +224,7 @@ const MultipleFileHeader = forwardRef<HTMLDivElement, MultipleFileHeaderProperti
 		</Carousel>;
 	},
 );
+MultipleFileHeader.displayName = 'MultipleFileHeader';
 
 type MultipleFilesFooterProperties = {
 	fileLoaded: boolean;
@@ -244,3 +248,4 @@ const MultipleFilesFooter = forwardRef<HTMLDivElement, MultipleFilesFooterProper
 		</div>;
 	},
 );
+MultipleFilesFooter.displayName = 'MultipleFilesFooter';
