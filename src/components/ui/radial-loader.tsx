@@ -7,7 +7,7 @@ type Properties = {
 export function RadialLoader({percentAtom}: Properties) {
 	const [percent] = useAtom(percentAtom);
 
-	return <div className='w-8 h-14 flex flex-col justify-end'>
+	return <div className='w-8 h-14 flex justify-center items-center pt-3'>
 		<svg className='w-8 h-8 transform translate-x-1 translate-y-1' aria-hidden='true'>
 			<circle
 				className='stroke-muted'
@@ -17,7 +17,7 @@ export function RadialLoader({percentAtom}: Properties) {
 				cx='15'
 				cy='15' />
 			<circle
-				className='stroke-foreground transition-all'
+				className='stroke-primary transition-all'
 				strokeWidth='5'
 				strokeDasharray={2 * Math.PI * 12.5}
 				strokeDashoffset={(2 * Math.PI * 12.5) - (percent / 100 * 2 * Math.PI * 12.5)}

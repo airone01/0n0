@@ -18,10 +18,11 @@ export default function HomePage() {
 	return (
 		<>
 			<main className='grow flex flex-col items-center justify-center'>
-				<div className='container flex flex-col items-center justify-center p-4 pt-16'>
-					<h1 className='cool-title flex just-center items-center'>
-            NoConverter<RadialLoader percentAtom={percentAtom} />
-					</h1>
+				<div className='container flex flex-col items-center justify-center p-8 pt-12'>
+					<div className='flex just-center items-center'>
+						<h1 className='text-6xl font-extrabold'>NoConverter</h1>
+						<RadialLoader percentAtom={percentAtom} />
+					</div>
 					<TypingAnimation />
 				</div>
 				<Ffmpeg ffmpegMessagesAtom={ffmpegMessagesAtom} percentAtom={percentAtom} />

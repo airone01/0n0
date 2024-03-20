@@ -24,17 +24,17 @@ export function ModeToggle() {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align='end'>
-				<DropdownMenuItem className='flex gap-2' onClick={() => {
+				<DropdownMenuItem className='flex gap-2 cursor-pointer' onClick={() => {
 					setTheme('light');
 				}}>
           Light
 				</DropdownMenuItem>
-				<DropdownMenuItem className='flex gap-2' onClick={() => {
+				<DropdownMenuItem className='flex gap-2 cursor-pointer' onClick={() => {
 					setTheme('dark');
 				}}>
           Dark
 				</DropdownMenuItem>
-				<DropdownMenuItem className='flex gap-2' onClick={() => {
+				<DropdownMenuItem className='flex gap-2 cursor-pointer' onClick={() => {
 					setTheme('system');
 				}}>
           System

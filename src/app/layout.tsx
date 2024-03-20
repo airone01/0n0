@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={`${poppins.className} flex flex-col min-h-screen antialiased`}>
+			<body className={`${poppins.className} flex flex-col min-h-screen antialiased bg-background text-foreground`}>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
