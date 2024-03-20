@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import {type PrimitiveAtom, atom, useAtom} from 'jotai';
+import {forwardRef, type ReactElement} from 'react';
 import {FileTypeButton} from '../filetype-button';
 import {Input} from './input';
-import {Card, CardContent} from './card';
-import {Label} from './label';
+import {
+	Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
+} from './card';
 import {Button} from './button';
 import MyMediaPlayer from './media-player';
 import {
@@ -15,6 +17,7 @@ import {
 	CarouselPrevious,
 } from './carousel';
 import {type AugmentedFileType, actionsFromFile} from '~/ffmpeg-util';
+import {cn} from '~/lib/utils';
 
 type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 type Properties = {
@@ -55,61 +58,91 @@ export default function FileCard({fileAtom, fileLoaded, transcode, augmentedFile
 		}
 	};
 
+	let cardTitle = 'Upload a file';
+	let cardDesc = 'Click the upload button or drag and drop below';
+	let cardContent: ReactElement = <Input id='file' multiple type='file' onChange={onFileUpload} />;
+	let cardFooter: ReactElement | undefined;
+
 	switch (fileMode) {
 		case 'single': {
-			return <SingleFileCard augmentedFileTypeAtom={augmentedFileTypeAtom} transcode={transcode} fileLoaded={fileLoaded} file={files[0]!} />;
+			const file = files[0]!;
+			const fileActions = actionsFromFile(file);
+
+			cardTitle = 'Convert your file';
+			cardDesc = 'Now hit the convert button below';
+			cardContent = <SingleFileHeader file={file} />;
+			cardFooter = <SingleFileFooter file={file} fileActions={fileActions} fileLoaded={fileLoaded} transcode={transcode} augmentedFileTypeAtom={augmentedFileTypeAtom} />;
+			break;
 		}
 
 		case 'multiple': {
-			return <MultipleFileCards files={files} augmentedFileTypeAtom={augmentedFileTypeAtom} transcode={transcode} />;
+			cardTitle = 'Convert your files';
+			cardDesc = 'Now hit the convert button below';
+			cardContent = <MultipleFileHeader files={files} />;
+			cardFooter = <MultipleFilesFooter fileLoaded={fileLoaded} transcode={transcode} fileActions={actionsFromFile(files[0]!)} augmentedFileTypeAtom={augmentedFileTypeAtom} />;
+			break;
 		}
 
 		// Case 'none':
-		default: {
-			return <>
-				<Label htmlFor='file'>Upload file or drag and drop here</Label>
-				<Input id='file' multiple type='file' onChange={onFileUpload} />
-			</>;
-		}
+		default:
 	}
+
+	return <Card>
+		<CardHeader>
+			<CardTitle>{cardTitle}</CardTitle>
+			<CardDescription>{cardDesc}</CardDescription>
+		</CardHeader>
+		<CardContent>
+			{cardContent}
+		</CardContent>
+		{cardFooter && <CardFooter>
+			{cardFooter}
+		</CardFooter>}
+	</Card>;
 }
 
-type SingleFileCardParameters = {
+type SingleFileHeaderProperties = {
 	file: File;
+} & React.HTMLProps<HTMLDivElement>;
+const SingleFileHeader = forwardRef<HTMLDivElement, SingleFileHeaderProperties>(
+	({className, file, ...properties}, reference) => {
+		const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
+
+		return <>
+			{file.type.startsWith('image')
+				? <Image
+					alt={file.name}
+					src={URL.createObjectURL(file)}
+					width={300}
+					height={300}
+					className='w-full h-full object-contain rounded-t-xl'
+				/>
+				: (file.type.startsWith('video')
+					? <MyMediaPlayer file={file} setWidthHeight={setWidthHeight} />
+					: 'Unknown file type')
+			}
+			<div ref={reference} className={cn('text-center w-full', className)} {...properties}>
+				<p className='text-lg font-semibold w-full px-2 truncate'>{file.name}</p>
+				<p className='text-sm text-gray-500 dark:text-gray-400'>{file.type}</p>
+				{widthHeight[0] === undefined ? ''
+					: <p className='text-sm text-gray-500 dark:text-gray-400'>{widthHeight[0]} x {widthHeight[1]} pixels</p>}
+			</div>
+		</>;
+	},
+);
+
+type SingleFileFooterProperties = {
+	file: File;
+	fileActions: ReturnType<typeof actionsFromFile>;
 	fileLoaded: boolean;
 	transcode: () => void;
 	augmentedFileTypeAtom: PrimitiveAtom<AugmentedFileType | undefined>;
-};
-function SingleFileCard({file, fileLoaded, transcode, augmentedFileTypeAtom}: SingleFileCardParameters) {
-	const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(augmentedFileTypeAtom);
-	const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
+} & React.HTMLProps<HTMLDivElement>;
+const SingleFileFooter = forwardRef<HTMLDivElement, SingleFileFooterProperties>(
+	({className, fileActions, transcode, fileLoaded, augmentedFileTypeAtom, file, ...properties}, reference) => {
+		const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(augmentedFileTypeAtom);
 
-	const fileActions = actionsFromFile(file);
-
-	return <div className='flex flex-col justify-center items-center gap-4'>
-		<Card className='w-full max-w-md'>
-			<CardContent className='flex flex-col items-center gap-4 px-0'>
-				{file.type.startsWith('image')
-					? <Image
-						alt={file.name}
-						src={URL.createObjectURL(file)}
-						width={300}
-						height={300}
-						className='w-full h-full object-contain rounded-t-xl'
-					/>
-					: (file.type.startsWith('video')
-						? <MyMediaPlayer file={file} setWidthHeight={setWidthHeight} />
-						: 'Unknown file type')
-				}
-				<div className='text-center w-full'>
-					<p className='text-lg font-semibold w-full px-2 truncate'>{file.name}</p>
-					<p className='text-sm text-gray-500 dark:text-gray-400'>{file.type}</p>
-					{widthHeight[0] === undefined ? ''
-						: <p className='text-sm text-gray-500 dark:text-gray-400'>{widthHeight[0]} x {widthHeight[1]} pixels</p>}
-				</div>
-			</CardContent>
-		</Card>
-		<div className='w-96 flex flex-col justify-center items-center gap-4'>
+		return <div className='w-96 flex flex-col justify-center items-center gap-4'>
 			<h3>Select a format to convert to</h3>
 			<div className='flex flex-wrap justify-center items-center gap-1'>
 				{fileActions.map(({format}, index) => <FileTypeButton className={format === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${format.extension}-${index}`} fileType={format} onClick={() => {
@@ -118,73 +151,80 @@ function SingleFileCard({file, fileLoaded, transcode, augmentedFileTypeAtom}: Si
 			</div>
 			<h3>And hit this button!</h3>
 			<Button disabled={!fileLoaded} variant='destructive' className='bg-green-700 hover:bg-green-600' onClick={transcode}>{fileLoaded ? 'Convert!' : 'Loading...'}</Button>
-		</div>
-	</div >;
-}
+		</div>;
+	},
+);
 
-type MultipleFileCardsParameters = {
+type MultipleFileHeaderProperties = {
 	files: File[];
-	augmentedFileTypeAtom: PrimitiveAtom<AugmentedFileType | undefined>;
+} & React.HTMLProps<HTMLDivElement>;
+const MultipleFileHeader = forwardRef<HTMLDivElement, MultipleFileHeaderProperties>(
+	({className, files, ...properties}, reference) => {
+		const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
+		const [, setApi] = useAtom(carouselAtom);
+
+		return <Carousel
+			ref={reference}
+			setApi={setApi}
+			className='max-w-md'
+		>
+			<CarouselContent>
+				{files.map((file, index) =>
+					<CarouselItem key={`carousel-file-${index}`}>
+						<div className='flex justify-center items-center p-2'>
+							<Card className='w-full'>
+								<CardContent className='flex flex-col items-center gap-4 select-none'>
+									<div className='aspect-video w-full'>
+										{file.type.startsWith('image')
+											? <Image
+												alt={file.name}
+												src={URL.createObjectURL(file)}
+												width={300}
+												height={300}
+												className='w-full h-full object-contain rounded-t-xl'
+											/>
+											: (file.type.startsWith('video')
+												? <MyMediaPlayer file={file} setWidthHeight={setWidthHeight} />
+												: 'Unknown file type')
+										}
+									</div>
+									<div className='text-center w-full'>
+										<p className='text-lg font-semibold w-full px-2 truncate'>{file.name}</p>
+										<p className='text-sm text-gray-500 dark:text-gray-400'>{file.type}</p>
+										{widthHeight[0] === undefined ? ''
+											: <p className='text-sm text-gray-500 dark:text-gray-400'>{widthHeight[0]} x {widthHeight[1]} pixels</p>}
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+					</CarouselItem>,
+				)}
+			</CarouselContent>
+			<CarouselPrevious />
+			<CarouselNext />
+		</Carousel>;
+	},
+);
+
+type MultipleFilesFooterProperties = {
+	fileLoaded: boolean;
 	transcode: () => void;
-};
-function MultipleFileCards({files, augmentedFileTypeAtom, transcode}: MultipleFileCardsParameters) {
-	const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(augmentedFileTypeAtom);
-	const [widthHeight, setWidthHeight] = useAtom(widthHeightAtom);
-	const [, setApi] = useAtom(carouselAtom);
+	fileActions: ReturnType<typeof actionsFromFile>;
+	augmentedFileTypeAtom: PrimitiveAtom<AugmentedFileType | undefined>;
+} & React.HTMLProps<HTMLDivElement>;
+const MultipleFilesFooter = forwardRef<HTMLDivElement, MultipleFilesFooterProperties>(
+	({className, fileLoaded, fileActions, transcode, augmentedFileTypeAtom, ...properties}, reference) => {
+		const [chosenAugmentedFileType, setChosenAugmentedFileType] = useAtom(augmentedFileTypeAtom);
 
-	const fileActions = actionsFromFile(files[0]!); // TODO: add logick here
-
-	return (
-		<div className='flex flex-col justify-center items-center gap-4'>
-			<Carousel
-				setApi={setApi}
-				className='max-w-md'
-			>
-				<CarouselContent>
-					{files.map((file, index) =>
-						<CarouselItem key={`carousel-file-${index}`}>
-							<div className='flex justify-center items-center p-2'>
-								<Card className='w-full'>
-									<CardContent className='flex flex-col items-center gap-4 select-none'>
-										<div className='aspect-video w-full'>
-											{file.type.startsWith('image')
-												? <Image
-													alt={file.name}
-													src={URL.createObjectURL(file)}
-													width={300}
-													height={300}
-													className='w-full h-full object-contain rounded-t-xl'
-												/>
-												: (file.type.startsWith('video')
-													? <MyMediaPlayer file={file} setWidthHeight={setWidthHeight} />
-													: 'Unknown file type')
-											}
-										</div>
-										<div className='text-center w-full'>
-											<p className='text-lg font-semibold w-full px-2 truncate'>{file.name}</p>
-											<p className='text-sm text-gray-500 dark:text-gray-400'>{file.type}</p>
-											{widthHeight[0] === undefined ? ''
-												: <p className='text-sm text-gray-500 dark:text-gray-400'>{widthHeight[0]} x {widthHeight[1]} pixels</p>}
-										</div>
-									</CardContent>
-								</Card>
-							</div>
-						</CarouselItem>,
-					)}
-				</CarouselContent>
-				<CarouselPrevious />
-				<CarouselNext />
-			</Carousel>
-			<div className='w-96 flex flex-col justify-center items-center gap-4'>
-				<h3>Select a format to convert to</h3>
-				<div className='flex flex-wrap justify-center items-center gap-1'>
-					{fileActions.map(({format}, index) => <FileTypeButton className={format === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${format.extension}-${index}`} fileType={format} onClick={() => {
-						setChosenAugmentedFileType(format);
-					}} />)}
-				</div>
-				<h3>And hit this button!</h3>
-				<Button disabled={!true} variant='destructive' className='bg-green-700 hover:bg-green-600' onClick={transcode}>Convert</Button>
+		return <div className='w-96 flex flex-col justify-center items-center gap-4'>
+			<h3>Select a format to convert to</h3>
+			<div className='flex flex-wrap justify-center items-center gap-1'>
+				{fileActions.map(({format}, index) => <FileTypeButton className={format === chosenAugmentedFileType ? 'outline' : ''} variant='outline' key={`action-${format.extension}-${index}`} fileType={format} onClick={() => {
+					setChosenAugmentedFileType(format);
+				}} />)}
 			</div>
-		</div>
-	);
-}
+			<h3>And hit this button!</h3>
+			<Button disabled={!true} variant='destructive' className='bg-green-700 hover:bg-green-600' onClick={transcode}>Convert</Button>
+		</div>;
+	},
+);
