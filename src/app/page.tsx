@@ -2,12 +2,14 @@
 
 import {atom, useAtom} from 'jotai';
 import {ChevronsUpIcon} from 'lucide-react';
+import React from 'react';
 import TypingAnimation from '@/typing-animation';
 import Ffmpeg from '@/ffmpeg';
 import {
 	Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTrigger,
 } from '@/ui/drawer';
 import {RadialLoader} from '@/ui/radial-loader';
+import {cn} from '~/lib/utils';
 
 const percentAtom = atom(0);
 const ffmpegMessagesAtom = atom<string[]>([]);
@@ -18,13 +20,7 @@ export default function HomePage() {
 	return (
 		<>
 			<main className='grow flex flex-col items-center justify-center'>
-				<div className='container flex flex-col items-center justify-center p-8 pt-12'>
-					<div className='flex just-center items-center'>
-						<h1 className='text-6xl font-extrabold'>NoConverter</h1>
-						<RadialLoader percentAtom={percentAtom} />
-					</div>
-					<TypingAnimation />
-				</div>
+				<Title />
 				<Ffmpeg ffmpegMessagesAtom={ffmpegMessagesAtom} percentAtom={percentAtom} />
 			</main >
 			<Drawer>
@@ -37,3 +33,15 @@ export default function HomePage() {
 		</>
 	);
 }
+
+const Title = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
+	({className, ...properties}, reference) =>
+		<div ref={reference} className={cn('container flex flex-col items-center justify-center p-8 pt-12', className)} {...properties}>
+			<div className='flex just-center items-center'>
+				<h1 className='text-6xl font-extrabold'>NoConverter</h1>
+				<RadialLoader percentAtom={percentAtom} />
+			</div>
+			<TypingAnimation />
+		</div>,
+);
+Title.displayName = 'Title';
