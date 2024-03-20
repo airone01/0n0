@@ -3,6 +3,7 @@
 import {atom, useAtom} from 'jotai';
 import {ChevronsUpIcon} from 'lucide-react';
 import React from 'react';
+import {Libre_Franklin} from 'next/font/google';
 import TypingAnimation from '@/typing-animation';
 import Ffmpeg from '@/ffmpeg';
 import {
@@ -34,9 +35,15 @@ export default function HomePage() {
 	);
 }
 
+// eslint-disable-next-line new-cap
+const libreFranklin = Libre_Franklin({
+	weight: '900',
+	subsets: ['latin'],
+});
+
 const Title = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
 	({className, ...properties}, reference) =>
-		<div ref={reference} className={cn('container flex flex-col items-center justify-center p-8 pt-12', className)} {...properties}>
+		<div ref={reference} className={cn(libreFranklin.className, 'container flex flex-col items-center justify-center p-8 pt-12', className)} {...properties}>
 			<div className='flex just-center items-center'>
 				<h1 className='text-6xl font-extrabold'>NoConverter</h1>
 				<RadialLoader percentAtom={percentAtom} />
