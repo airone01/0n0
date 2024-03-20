@@ -2,7 +2,6 @@ import {forwardRef} from 'react';
 import {DownloadIcon, FullscreenIcon, XIcon} from 'lucide-react';
 import Image from 'next/image';
 import {atom, useAtom} from 'jotai';
-import {Card} from './card';
 import {
 	Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger,
 } from './dialog';
@@ -106,6 +105,7 @@ const VideoFileElement = forwardRef<HTMLDivElement, VideoFileElementProperties>(
 		<MyMediaPlayer file={file} widthHeightAtom={widthHeightAtom} />
 	</div>,
 );
+VideoFileElement.displayName = 'VideoFileElement';
 
 // Type FileElementProperties = {
 // 	file: File;
