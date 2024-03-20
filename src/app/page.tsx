@@ -20,8 +20,8 @@ export default function HomePage() {
 
 	return (
 		<>
-			<Title />
-			<main className='grow flex flex-col items-center justify-center'>
+			<main className='grow flex flex-col items-center justify-start gap-8'>
+				<Title />
 				<Ffmpeg ffmpegMessagesAtom={ffmpegMessagesAtom} percentAtom={percentAtom} />
 			</main >
 			<Drawer>

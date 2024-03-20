@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import {type PrimitiveAtom, atom, useAtom} from 'jotai';
 import {forwardRef, type ReactElement} from 'react';
+import {XIcon} from 'lucide-react';
 import {FileTypeButton} from '../filetype-button';
+import {Dialog, DialogTrigger, DialogContent} from './dialog';
 import {Input} from './input';
 import {
 	Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
@@ -16,90 +18,104 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from './carousel';
-import {type AugmentedFileType, actionsFromFile} from '~/ffmpeg-util';
+import {type AugmentedFileType, type actionsFromFile} from '~/ffmpeg-util';
 import {cn} from '~/lib/utils';
 
-type FileMode = 'single' | 'multiple' | 'picture' | 'none';
 type Properties = {
-	fileAtom: PrimitiveAtom<File | undefined>;
 	fileLoaded: boolean;
+	filesAtom: PrimitiveAtom<File[]>;
 	transcode: () => void;
 	augmentedFileTypeAtom: PrimitiveAtom<AugmentedFileType | undefined>;
 };
 
 const widthHeightAtom = atom<[number | undefined, number | undefined]>([undefined, undefined]);
-const fileModeAtom = atom<FileMode>('none');
-const filesAtom = atom<File[]>([]);
 const carouselAtom = atom<CarouselApi | undefined>(undefined);
 
-export default function FileCard({fileAtom, fileLoaded, transcode, augmentedFileTypeAtom}: Properties) {
-	const [fileMode, setFileMode] = useAtom(fileModeAtom);
+export default function FileCard({fileLoaded, filesAtom, transcode, augmentedFileTypeAtom}: Properties) {
 	const [files, setFiles] = useAtom(filesAtom);
-	const [, setFile] = useAtom(fileAtom);
 
 	const onFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {files} = event.target;
 
 		if (files === null || files?.length === 0) {
-			setFileMode('none');
 			setFiles([]);
 			return;
 		}
 
 		setFiles(Array.from(files));
-
-		if (files.length === 1) {
-			setFileMode('single');
-			setFile(files[0]);
-		}
-
-		if (files.length > 1) {
-			setFileMode('multiple');
-		}
 	};
 
-	let cardTitle = 'Upload a file';
-	let cardDesc = 'Click the upload button or drag and drop below';
-	let cardContent: ReactElement = <Input id='file' multiple type='file' onChange={onFileUpload} />;
 	let cardFooter: ReactElement | undefined;
 
-	switch (fileMode) {
-		case 'single': {
-			const file = files[0]!;
-			const fileActions = actionsFromFile(file);
+	// Switch (fileMode) {
+	// 	case 'single': {
+	// 		const file = files[0]!;
+	// 		const fileActions = actionsFromFile(file);
 
-			cardTitle = 'Convert your file';
-			cardDesc = 'Now hit the convert button below';
-			cardContent = <SingleFileHeader file={file} />;
-			cardFooter = <SingleFileFooter file={file} fileActions={fileActions} fileLoaded={fileLoaded} transcode={transcode} augmentedFileTypeAtom={augmentedFileTypeAtom} />;
-			break;
-		}
+	// 		cardTitle = 'Convert your file';
+	// 		cardDesc = 'Now hit the convert button below';
+	// 		cardContent = <SingleFileHeader file={file} />;
+	// 		cardFooter = <SingleFileFooter file={file} fileActions={fileActions} fileLoaded={fileLoaded} transcode={transcode} augmentedFileTypeAtom={augmentedFileTypeAtom} />;
+	// 		break;
+	// 	}
 
-		case 'multiple': {
-			cardTitle = 'Convert your files';
-			cardDesc = 'Now hit the convert button below';
-			cardContent = <MultipleFileHeader files={files} />;
-			cardFooter = <MultipleFilesFooter fileLoaded={fileLoaded} transcode={transcode} fileActions={actionsFromFile(files[0]!)} augmentedFileTypeAtom={augmentedFileTypeAtom} />;
-			break;
-		}
+	// 	case 'multiple': {
+	// 		cardTitle = 'Convert your files';
+	// 		cardDesc = 'Now hit the convert button below';
+	// 		cardContent = <MultipleFileHeader files={files} />;
+	// 		cardFooter = <MultipleFilesFooter fileLoaded={fileLoaded} transcode={transcode} fileActions={actionsFromFile(files[0])} augmentedFileTypeAtom={augmentedFileTypeAtom} />;
+	// 		break;
+	// 	}
 
-		// Case 'none':
-		default:
-	}
+	// 	// Case 'none':
+	// 	default:
+	// }
 
-	return <Card>
+	return <Card className='w-96'>
 		<CardHeader>
-			<CardTitle>{cardTitle}</CardTitle>
-			<CardDescription>{cardDesc}</CardDescription>
+			<CardTitle>Upload a file</CardTitle>
+			<CardDescription>Click the upload button or drag and drop below</CardDescription>
 		</CardHeader>
-		<CardContent>
-			{cardContent}
+		<CardContent className='flex flex-col justify-center items-center gap-2'>
+			<Input id='file' multiple type='file' onChange={onFileUpload} />
+			{files.length > 0 && <div className='w-full flex flex-col justify-center items-center gap-1 rounded-xl border bg-card text-card-foreground shadow p-1'>
+				{files.map((file, index) =>
+					<FileElement file={file} key={`filelist_file_${index}`} />,
+				)}
+			</div>}
 		</CardContent>
 		{cardFooter && <CardFooter>
 			{cardFooter}
 		</CardFooter>}
 	</Card>;
 }
+
+type FileElementProperties = {
+	file: File;
+} & React.HTMLProps<HTMLDivElement>;
+const FileElement = forwardRef<HTMLDivElement, FileElementProperties>(
+	({className, file, ...properties}, reference) => {
+		const [, ...secondPartOfFileType] = file.type.split('/');
+		const actualFileType = secondPartOfFileType.join('/');
+
+		return <div ref={reference} className={cn('w-full flex justify-between items-center', className)} {...properties}>
+			{['image', 'video'].includes(file.type.split('/')[0]!) ? <Dialog>
+				<DialogTrigger asChild>
+					<p className='underline cursor-pointer hover:text-primary text-md [&:not(:first-child)]:mt-6 pl-2 py-0 truncate'>{file.name}</p>
+				</DialogTrigger>
+				<DialogContent>
+					{/* TODO: Play video or show image here */}
+				</DialogContent>
+			</Dialog> : <p className='text-md [&:not(:first-child)]:mt-6 pl-2 py-0 truncate'>{file.name}</p>}
+			<div className='flex justify-center items-center gap-2'>
+				<p className='text-sm text-muted-foreground'>{actualFileType}</p>
+				<Button variant='destructive' className='w-7 h-7 p-1'>
+					<XIcon />
+				</Button>
+			</div>
+		</div>;
+	},
+);
 
 type SingleFileHeaderProperties = {
 	file: File;

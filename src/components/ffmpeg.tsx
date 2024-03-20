@@ -23,18 +23,18 @@ type Properties = {
 	percentAtom: PrimitiveAtom<number>;
 };
 
-const fileAtom = atom<File | undefined>(undefined);
 const ffmpegLoadedAtom = atom(false);
 const fileLoadedAtom = atom(false);
 const transcodedDataAtom = atom<Blob | undefined>(undefined);
 const outputFileNameAtom = atom<string | undefined>(undefined);
 const chosenAugmentedFileTypeAtom = atom<AugmentedFileType | undefined>(undefined);
+const filesAtom = atom<File[]>([]);
 
 export default function Ffmpeg({
 	ffmpegMessagesAtom,
 	percentAtom,
 }: Properties) {
-	const [file] = useAtom(fileAtom);
+	const [files] = useAtom(filesAtom);
 	const [ffmpegLoaded, setFfmpegLoaded] = useAtom(ffmpegLoadedAtom);
 	const [fileLoaded, setFileLoaded] = useAtom(fileLoadedAtom);
 	const [transcodedData, setTranscodedData] = useAtom(transcodedDataAtom);
@@ -93,11 +93,12 @@ export default function Ffmpeg({
 
 	useEffect(() => {
 		(async () => {
-			if (file === undefined) {
+			// TODO: handle multiple files
+			if (files[0] === undefined) {
 				return;
 			}
 
-			const result = await file.arrayBuffer();
+			const result = await files[0].arrayBuffer();
 			const fileData = new Uint8Array(result);
 			await ffmpeg.writeFile('input_file', fileData);
 		})().then(() => {
@@ -106,7 +107,7 @@ export default function Ffmpeg({
 		}).catch(error => {
 			console.error(error);
 		});
-	}, [file]);
+	}, [files]);
 
 	useEffect(() => {
 		void loadFfmpeg();
@@ -114,7 +115,7 @@ export default function Ffmpeg({
 
 	return <>
 		<div className='flex flex-col w-96 max-w-sm justify-center items-center gap-1.5'>
-			<FileCard augmentedFileTypeAtom={chosenAugmentedFileTypeAtom} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} fileAtom={fileAtom} />
+			<FileCard filesAtom={filesAtom} augmentedFileTypeAtom={chosenAugmentedFileTypeAtom} transcode={transcode} fileLoaded={fileLoaded && ffmpegLoaded} />
 		</div>
 
 		{transcodedData === null || transcodedData === undefined
