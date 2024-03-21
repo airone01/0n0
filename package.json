@@ -10,6 +10,7 @@
     "lint:fix": "xo --fix",
     "start": "next start",
     "prepare": "husky",
+    "commit": "cz",
     "commitlint": "commitlint --edit"
   },
   "dependencies": {
@@ -50,6 +51,8 @@
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "autoprefixer": "^10.4.14",
+    "commitiquette": "^1.2.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.4",
     "husky": "^9.0.11",
@@ -63,5 +66,10 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.26.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "commitiquette"
+    }
   }
 }
