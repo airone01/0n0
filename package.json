@@ -8,7 +8,9 @@
     "dev": "next dev",
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.10",
@@ -39,6 +41,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
     "@types/eslint": "^8.44.7",
     "@types/node": "^18.17.0",
     "@types/react": "^18.2.37",
@@ -48,6 +52,7 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.4",
+    "husky": "^9.0.11",
     "media-icons": "^0.10.0",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
