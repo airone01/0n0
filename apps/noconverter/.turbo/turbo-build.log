@@ -1,55 +1,0 @@
-
-> noconverter@0.1.0 build /home/rack/_/noconverter/apps/noconverter
-> next build
-
-  [1m[38;2;173;127;168m ▲ Next.js 14.1.4[39m[22m
-   - Environments: .env
-
- [37m[1m [22m[39m Creating an optimized production build ...
- [32m[1m✓[22m[39m Compiled successfully
-[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[?25h
-[36m./src/components/ffmpeg.tsx[39m
-[33m39[39m:[33m9[39m  [33m[1mWarning[22m[39m: 'ffmpegLoaded' is assigned a value but never used.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m40[39m:[33m9[39m  [33m[1mWarning[22m[39m: 'fileLoaded' is assigned a value but never used.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m76[39m:[33m8[39m  [33m[1mWarning[22m[39m: 'transcode' is assigned a value but never used.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m111[39m:[33m5[39m  [33m[1mWarning[22m[39m: React Hook useEffect has missing dependencies: 'ffmpeg' and 'setFileLoaded'. Either include them or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
-[33m115[39m:[33m5[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'loadFfmpeg'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
-
-[36m./src/components/filetype-button.tsx[39m
-[33m4[39m:[33m9[39m  [33m[1mWarning[22m[39m: 'Slot' is defined but never used.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m82[39m:[33m24[39m  [33m[1mWarning[22m[39m: 'size' is defined but never used. Allowed unused args must match /^_/u.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m82[39m:[33m30[39m  [33m[1mWarning[22m[39m: 'asChild' is assigned a value but never used.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-
-[36m./src/components/ui/files-card.tsx[39m
-[33m18[39m:[33m4[39m  [33m[1mWarning[22m[39m: 'className' is defined but never used. Allowed unused args must match /^_/u.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m18[39m:[33m23[39m  [33m[1mWarning[22m[39m: 'reference' is defined but never used. Allowed unused args must match /^_/u.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m56[39m:[33m4[39m  [33m[1mWarning[22m[39m: 'className' is defined but never used. Allowed unused args must match /^_/u.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m56[39m:[33m40[39m  [33m[1mWarning[22m[39m: 'properties' is defined but never used. Allowed unused args must match /^_/u.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-[33m56[39m:[33m53[39m  [33m[1mWarning[22m[39m: 'reference' is defined but never used. Allowed unused args must match /^_/u.  [90m[1m@typescript-eslint/no-unused-vars[22m[39m
-
-[36m./src/components/ui/media-player.tsx[39m
-[33m31[39m:[33m5[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'setWidthHeight'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
-
-[36m./src/components/ui/use-toast.ts[39m
-[33m179[39m:[33m5[39m  [33m[1mWarning[22m[39m: React Hook React.useEffect has a missing dependency: 'setState'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
-
-[36minfo[39m  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
-[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
-[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
-[?25l [37m[1m [22m[39m Generating static pages (0/4)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/4)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/4)  [36m[==  ][39m  [37m[1m [22m[39m Generating static pages (2/4) 
-[2K[1G[1A[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (4/4) 
-[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
-[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
-
-[4mRoute (app)[24m                              [4mSize[24m     [4mFirst Load JS[24m
-┌ ○ /                                    85.3 kB         [37m[1m198 kB[22m[39m
-└ ○ /_not-found                          886 B          [37m[1m85.6 kB[22m[39m
-+ First Load JS shared by all            [37m[1m84.7 kB[22m[39m
-  ├ chunks/397-f6c5181715822ebf.js       29 kB
-  ├ chunks/b2464fc3-5bf06c43b383e47a.js  53.4 kB
-  └ other shared chunks (total)          2.29 kB
-
-
-○  (Static)  prerendered as static content
-
-[?25h
