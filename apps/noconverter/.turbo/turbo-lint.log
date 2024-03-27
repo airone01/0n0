@@ -1,0 +1,9 @@
+
+> noconverter@0.1.0 lint /home/rack/_/noconverter/apps/noconverter
+> xo
+
+
+  [4msrc/components/ffmpeg.tsx[24m[8m[2m[90m:97:4[39m[22m[28m
+  [33m⚠[39m  [2m97[90m:[39m4[22m  Unexpected [1mtodo[22m comment: [1mTODO: handle multiple files[22m.  [2mno-warning-comments[22m
+
+  [33m1 warning[39m

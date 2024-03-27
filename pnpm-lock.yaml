@@ -4,153 +4,158 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@ffmpeg/ffmpeg':
-    specifier: ^0.12.10
-    version: 0.12.10
-  '@ffmpeg/util':
-    specifier: ^0.12.1
-    version: 0.12.1
-  '@radix-ui/react-dialog':
-    specifier: ^1.0.5
-    version: 1.0.5(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  '@radix-ui/react-dropdown-menu':
-    specifier: ^2.0.6
-    version: 2.0.6(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  '@radix-ui/react-icons':
-    specifier: ^1.3.0
-    version: 1.3.0(react@18.2.0)
-  '@radix-ui/react-label':
-    specifier: ^2.0.2
-    version: 2.0.2(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  '@radix-ui/react-popover':
-    specifier: ^1.0.7
-    version: 1.0.7(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  '@radix-ui/react-separator':
-    specifier: ^1.0.3
-    version: 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  '@radix-ui/react-slot':
-    specifier: ^1.0.2
-    version: 1.0.2(@types/react@18.2.72)(react@18.2.0)
-  '@radix-ui/react-toast':
-    specifier: ^1.1.5
-    version: 1.1.5(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  '@t3-oss/env-nextjs':
-    specifier: ^0.7.1
-    version: 0.7.3(typescript@5.4.3)(zod@3.22.4)
-  '@vidstack/react':
-    specifier: next
-    version: 1.10.9(@types/react@18.2.72)(react@18.2.0)
-  class-variance-authority:
-    specifier: ^0.7.0
-    version: 0.7.0
-  clsx:
-    specifier: ^2.1.0
-    version: 2.1.0
-  embla-carousel-react:
-    specifier: ^8.0.0-rc22
-    version: 8.0.0(react@18.2.0)
-  jotai:
-    specifier: ^2.6.4
-    version: 2.7.1(@types/react@18.2.72)(react@18.2.0)
-  lucide-react:
-    specifier: ^0.316.0
-    version: 0.316.0(react@18.2.0)
-  next:
-    specifier: ^14.0.4
-    version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
-  next-themes:
-    specifier: ^0.2.1
-    version: 0.2.1(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
-  react:
-    specifier: 18.2.0
-    version: 18.2.0
-  react-dom:
-    specifier: 18.2.0
-    version: 18.2.0(react@18.2.0)
-  react-type-animation:
-    specifier: ^3.2.0
-    version: 3.2.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
-  tailwind-merge:
-    specifier: ^2.2.1
-    version: 2.2.2
-  tailwindcss-animate:
-    specifier: ^1.0.7
-    version: 1.0.7(tailwindcss@3.4.1)
-  vaul:
-    specifier: ^0.8.9
-    version: 0.8.9(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
-  zod:
-    specifier: ^3.22.4
-    version: 3.22.4
+importers:
 
-devDependencies:
-  '@commitlint/cli':
-    specifier: ^19.2.1
-    version: 19.2.1(@types/node@18.19.26)(typescript@5.4.3)
-  '@commitlint/config-conventional':
-    specifier: ^19.1.0
-    version: 19.1.0
-  '@types/eslint':
-    specifier: ^8.44.7
-    version: 8.56.6
-  '@types/node':
-    specifier: ^18.17.0
-    version: 18.19.26
-  '@types/react':
-    specifier: ^18.2.37
-    version: 18.2.72
-  '@types/react-dom':
-    specifier: ^18.2.15
-    version: 18.2.22
-  '@typescript-eslint/eslint-plugin':
-    specifier: ^6.11.0
-    version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.0)(typescript@5.4.3)
-  '@typescript-eslint/parser':
-    specifier: ^6.11.0
-    version: 6.21.0(eslint@8.57.0)(typescript@5.4.3)
-  autoprefixer:
-    specifier: ^10.4.14
-    version: 10.4.19(postcss@8.4.38)
-  commitiquette:
-    specifier: ^1.2.1
-    version: 1.2.1(@commitlint/cli@19.2.1)(commitizen@4.3.0)
-  cz-conventional-changelog:
-    specifier: ^3.3.0
-    version: 3.3.0(@types/node@18.19.26)(typescript@5.4.3)
-  eslint:
-    specifier: ^8.54.0
-    version: 8.57.0
-  eslint-config-next:
-    specifier: ^14.0.4
-    version: 14.1.4(eslint@8.57.0)(typescript@5.4.3)
-  husky:
-    specifier: ^9.0.11
-    version: 9.0.11
-  media-icons:
-    specifier: ^0.10.0
-    version: 0.10.0
-  postcss:
-    specifier: ^8.4.31
-    version: 8.4.38
-  prettier:
-    specifier: ^3.1.0
-    version: 3.2.5
-  prettier-plugin-tailwindcss:
-    specifier: ^0.5.7
-    version: 0.5.12(prettier@3.2.5)
-  semantic-release:
-    specifier: ^23.0.5
-    version: 23.0.6(typescript@5.4.3)
-  tailwindcss:
-    specifier: ^3.3.5
-    version: 3.4.1
-  typescript:
-    specifier: ^5.1.6
-    version: 5.4.3
-  xo:
-    specifier: ^0.58.0
-    version: 0.58.0(@types/eslint@8.56.6)(webpack@5.91.0)
+  .:
+    devDependencies:
+      '@commitlint/cli':
+        specifier: ^19.2.1
+        version: 19.2.1(@types/node@18.19.26)(typescript@5.4.3)
+      '@commitlint/config-conventional':
+        specifier: ^19.1.0
+        version: 19.1.0
+      '@types/eslint':
+        specifier: ^8.44.7
+        version: 8.56.6
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.11.0
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.0)(typescript@5.4.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.11.0
+        version: 6.21.0(eslint@8.57.0)(typescript@5.4.3)
+      commitiquette:
+        specifier: ^1.2.1
+        version: 1.2.1(@commitlint/cli@19.2.1)(commitizen@4.3.0)
+      cz-conventional-changelog:
+        specifier: ^3.3.0
+        version: 3.3.0(@types/node@18.19.26)(typescript@5.4.3)
+      eslint:
+        specifier: ^8.54.0
+        version: 8.57.0
+      eslint-config-next:
+        specifier: ^14.0.4
+        version: 14.1.4(eslint@8.57.0)(typescript@5.4.3)
+      husky:
+        specifier: ^9.0.11
+        version: 9.0.11
+      xo:
+        specifier: ^0.58.0
+        version: 0.58.0(@types/eslint@8.56.6)(webpack@5.91.0)
+
+  apps/noconverter:
+    dependencies:
+      '@ffmpeg/ffmpeg':
+        specifier: ^0.12.10
+        version: 0.12.10
+      '@ffmpeg/util':
+        specifier: ^0.12.1
+        version: 0.12.1
+      '@radix-ui/react-dialog':
+        specifier: ^1.0.5
+        version: 1.0.5(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-dropdown-menu':
+        specifier: ^2.0.6
+        version: 2.0.6(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-icons':
+        specifier: ^1.3.0
+        version: 1.3.0(react@18.2.0)
+      '@radix-ui/react-label':
+        specifier: ^2.0.2
+        version: 2.0.2(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-popover':
+        specifier: ^1.0.7
+        version: 1.0.7(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-separator':
+        specifier: ^1.0.3
+        version: 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-slot':
+        specifier: ^1.0.2
+        version: 1.0.2(@types/react@18.2.72)(react@18.2.0)
+      '@radix-ui/react-toast':
+        specifier: ^1.1.5
+        version: 1.1.5(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      '@t3-oss/env-nextjs':
+        specifier: ^0.7.1
+        version: 0.7.3(typescript@5.4.3)(zod@3.22.4)
+      '@vidstack/react':
+        specifier: next
+        version: 1.10.9(@types/react@18.2.72)(react@18.2.0)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
+      embla-carousel-react:
+        specifier: ^8.0.0-rc22
+        version: 8.0.0(react@18.2.0)
+      jotai:
+        specifier: ^2.6.4
+        version: 2.7.1(@types/react@18.2.72)(react@18.2.0)
+      lucide-react:
+        specifier: ^0.316.0
+        version: 0.316.0(react@18.2.0)
+      next:
+        specifier: ^14.0.4
+        version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
+      next-themes:
+        specifier: ^0.2.1
+        version: 0.2.1(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-type-animation:
+        specifier: ^3.2.0
+        version: 3.2.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      tailwind-merge:
+        specifier: ^2.2.1
+        version: 2.2.2
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.1)
+      vaul:
+        specifier: ^0.8.9
+        version: 0.8.9(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+    devDependencies:
+      '@types/node':
+        specifier: ^18.17.0
+        version: 18.19.26
+      '@types/react':
+        specifier: ^18.2.37
+        version: 18.2.72
+      '@types/react-dom':
+        specifier: ^18.2.15
+        version: 18.2.22
+      autoprefixer:
+        specifier: ^10.4.14
+        version: 10.4.19(postcss@8.4.38)
+      media-icons:
+        specifier: ^0.10.0
+        version: 0.10.0
+      postcss:
+        specifier: ^8.4.31
+        version: 8.4.38
+      prettier:
+        specifier: ^3.1.0
+        version: 3.2.5
+      prettier-plugin-tailwindcss:
+        specifier: ^0.5.7
+        version: 0.5.12(prettier@3.2.5)
+      semantic-release:
+        specifier: ^23.0.5
+        version: 23.0.6(typescript@5.4.3)
+      tailwindcss:
+        specifier: ^3.3.5
+        version: 3.4.1
+      typescript:
+        specifier: ^5.1.6
+        version: 5.4.3
 
 packages:
 
