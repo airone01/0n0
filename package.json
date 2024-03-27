@@ -7,11 +7,12 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "test": "echo No tests defined",
     "lint": "xo",
     "lint:fix": "xo --fix",
     "start": "next start",
     "prepare": "husky",
-    "commit": "cz",
+    "commit": "cz c",
     "commitlint": "commitlint --edit"
   },
   "dependencies": {
