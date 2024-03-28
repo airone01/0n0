@@ -7,7 +7,7 @@
   "packageManager": "pnpm@8.15.4",
   "scripts": {
     "prepare": "husky",
-    "commit": "git-cz",
+    "commitmake": "git-cz",
     "commitlint": "commitlint --edit"
   },
   "devDependencies": {

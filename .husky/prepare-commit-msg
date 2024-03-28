@@ -1,1 +1,1 @@
-exec < /dev/tty && pnpm run commit || true
+exec </dev/tty && pnpm run commitmake || true
