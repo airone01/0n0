@@ -7,19 +7,21 @@
   "packageManager": "pnpm@8.15.4",
   "scripts": {
     "prepare": "husky",
-    "commit": "cz c",
+    "commit": "git-cz",
     "commitlint": "commitlint --edit"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
-    "commitiquette": "^1.2.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "husky": "^9.0.11"
+    "@commitlint/cz-commitlint": "^19.2.0",
+    "commitizen": "^4.3.0",
+    "husky": "^9.0.11",
+    "inquirer": "9",
+    "turbo": "^1.13.0"
   },
   "config": {
     "commitizen": {
-      "path": "commitiquette"
+      "path": "@commitlint/cz-commitlint"
     }
   }
 }
