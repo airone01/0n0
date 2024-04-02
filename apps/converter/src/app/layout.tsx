@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-	title: 'NoConverter',
+	title: 'Converter',
 	description: 'Convert all files on the fly!',
 	icons: [{rel: 'icon', url: '/favicon.ico'}],
 };

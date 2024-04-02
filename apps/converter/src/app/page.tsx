@@ -45,7 +45,7 @@ const Title = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
 	({className, ...properties}, reference) =>
 		<div ref={reference} className={cn(libreFranklin.className, 'container flex flex-col items-center justify-center py-4', className)} {...properties}>
 			<div className='flex just-center items-center'>
-				<h1 className='text-6xl font-extrabold'>NoConverter</h1>
+				<h1 className='text-6xl font-extrabold'>converter</h1>
 				<RadialLoader percentAtom={percentAtom} />
 			</div>
 			<TypingAnimation />

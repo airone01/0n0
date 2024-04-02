@@ -1,9 +1,9 @@
 {
-  "name": "nosites",
+  "name": "0n0",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "repository": "https://github.com/AirOne01/noconverter.git",
+  "repository": "https://github.com/AirOne01/0n0.git",
   "packageManager": "pnpm@8.15.4",
   "scripts": {
     "prepare": "husky",
@@ -16,8 +16,8 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.0.11",
-    "inquirer": "9",
-    "turbo": "^1.13.0"
+    "inquirer": "^9.2.17",
+    "turbo": "^1.13.2"
   },
   "config": {
     "commitizen": {
