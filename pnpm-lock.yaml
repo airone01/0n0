@@ -14,12 +14,12 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.1.0
         version: 19.1.0
-      '@commitlint/cz-commitlint':
-        specifier: ^19.2.0
-        version: 19.2.0(@types/node@18.19.26)(commitizen@4.3.0)(inquirer@9.2.16)(typescript@5.4.3)
       commitizen:
         specifier: ^4.3.0
         version: 4.3.0(@types/node@18.19.26)(typescript@5.4.3)
+      cz-conventional-changelog:
+        specifier: ^3.3.0
+        version: 3.3.0(@types/node@18.19.26)(typescript@5.4.3)
       husky:
         specifier: ^9.0.11
         version: 9.0.11
@@ -241,26 +241,6 @@ packages:
     dependencies:
       '@commitlint/types': 19.0.3
       ajv: 8.12.0
-    dev: true
-
-  /@commitlint/cz-commitlint@19.2.0(@types/node@18.19.26)(commitizen@4.3.0)(inquirer@9.2.16)(typescript@5.4.3):
-    resolution: {integrity: sha512-kudzHMY9/GxflGyAWMiisiBq2UkyQL1D1eWjGKoC66qQ+5jxRYeDaiVwTdPxYMnmehftNcpksZATDYKqdPP0Wg==}
-    engines: {node: '>=v18'}
-    peerDependencies:
-      commitizen: ^4.0.3
-      inquirer: ^9.0.0
-    dependencies:
-      '@commitlint/ensure': 19.0.3
-      '@commitlint/load': 19.2.0(@types/node@18.19.26)(typescript@5.4.3)
-      '@commitlint/types': 19.0.3
-      chalk: 5.3.0
-      commitizen: 4.3.0(@types/node@18.19.26)(typescript@5.4.3)
-      inquirer: 9.2.16
-      lodash.isplainobject: 4.0.6
-      word-wrap: 1.2.5
-    transitivePeerDependencies:
-      - '@types/node'
-      - typescript
     dev: true
 
   /@commitlint/ensure@19.0.3:
@@ -3393,35 +3373,6 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils@2.8.1(@typescript-eslint/parser@6.21.0)(eslint-import-resolver-node@0.3.9)(eslint@8.57.0):
-    resolution: {integrity: sha512-rXDXR3h7cs7dy9RNpUlQf80nX31XWJEyGq1tRMo+6GsO5VmTe4UTwtmonAD4ZkAsrfMVDA2wlGJ3790Ys+D49Q==}
-    engines: {node: '>=4'}
-    peerDependencies:
-      '@typescript-eslint/parser': '*'
-      eslint: '*'
-      eslint-import-resolver-node: '*'
-      eslint-import-resolver-typescript: '*'
-      eslint-import-resolver-webpack: '*'
-    peerDependenciesMeta:
-      '@typescript-eslint/parser':
-        optional: true
-      eslint:
-        optional: true
-      eslint-import-resolver-node:
-        optional: true
-      eslint-import-resolver-typescript:
-        optional: true
-      eslint-import-resolver-webpack:
-        optional: true
-    dependencies:
-      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.3)
-      debug: 3.2.7
-      eslint: 8.57.0
-      eslint-import-resolver-node: 0.3.9
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /eslint-plugin-ava@14.0.0(eslint@8.57.0):
     resolution: {integrity: sha512-XmKT6hppaipwwnLVwwvQliSU6AF1QMHiNoLD5JQfzhUhf0jY7CO0O624fQrE+Y/fTb9vbW8r77nKf7M/oHulxw==}
     engines: {node: '>=14.17 <15 || >=16.4'}
@@ -3516,7 +3467,7 @@ packages:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@6.21.0)(eslint-import-resolver-node@0.3.9)(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@6.21.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
