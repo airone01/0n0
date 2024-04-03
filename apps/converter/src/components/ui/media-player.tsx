@@ -42,7 +42,7 @@ export default function MyMediaPlayer({file, widthHeightAtom}: Properties) {
 		CurrentVolumeIcon = VolumeIcon;
 	}
 
-	return <MediaPlayer autoPlay={false} ref={reference} src={file} className='text-background relative group rounded-t-xl'>
+	return <MediaPlayer autoPlay={false} ref={reference} src={{src: file, type: 'video/object'}} className='text-background relative group rounded-t-xl'>
 		<MediaProvider className='absolute' />
 		{startedOnce
 			? <div className='absolute w-full h-full flex flex-col justify-end items-center'>
