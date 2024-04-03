@@ -41,7 +41,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.1.1",
     "embla-carousel-react": "^8.0.0-rc22",
-    "lucide-react": "^0.316.0"
+    "lucide-react": "^0.316.0",
+    "vaul": "^0.8.9"
   },
   "devDependencies": {
     "@types/node": "^18.17.0",
