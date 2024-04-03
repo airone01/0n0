@@ -5,6 +5,11 @@
   "type": "module",
   "repository": "https://github.com/AirOne01/0n0.git",
   "packageManager": "pnpm@8.15.4",
+  "workspaces": [
+    "docs",
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "husky",
     "commitlint": "commitlint --edit",

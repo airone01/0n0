@@ -18,9 +18,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "~/utils": [
+        "./src/lib/utils.ts"
+      ],
+      "@/*": [
+        "./src/components/*"
+      ]
+    }
   },
   "include": [
-    "src"
+    "src/**/*",
   ]
 }
