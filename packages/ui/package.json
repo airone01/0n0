@@ -8,15 +8,20 @@
   "packageManager": "pnpm@8.15.4",
   "sideEffects": false,
   "exports": {
-    ".": "./src/index.js",
-    "./*": [
-      "./src/*.ts",
-      "./src/*.tsx",
-      "./src/*/index.ts"
-    ],
-    "./tailwind": {
-      "require": "./src/tailwind.cjs"
-    }
+    "./utils": "./src/lib/utils.ts",
+    "./globals.css": "./src/styles/globals.css",
+    "./button": "./src/components/button/index.ts",
+    "./card": "./src/components/card/index.ts",
+    "./carousel": "./src/components/carousel/index.ts",
+    "./dialog": "./src/components/dialog/index.ts",
+    "./drawer": "./src/components/drawer/index.ts",
+    "./dropdown-menu": "./src/components/dropdown-menu/index.ts",
+    "./input": "./src/components/input/index.ts",
+    "./label": "./src/components/label/index.ts",
+    "./mode-toggle": "./src/components/mode-toggle/index.ts",
+    "./popover": "./src/components/popover/index.ts",
+    "./separator": "./src/components/separator/index.ts",
+    "./toast": "./src/components/toast/index.ts"
   },
   "files": [
     "src"

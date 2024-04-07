@@ -12,6 +12,7 @@
     "test": "echo No tests defined"
   },
   "dependencies": {
+    "@0n0/ui": "workspace:*",
     "@ffmpeg/ffmpeg": "^0.12.10",
     "@ffmpeg/util": "^0.12.1",
     "@radix-ui/react-dialog": "^1.0.5",

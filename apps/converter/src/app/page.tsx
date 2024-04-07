@@ -4,11 +4,11 @@ import {atom, useAtom} from 'jotai';
 import {ChevronsUpIcon} from 'lucide-react';
 import React from 'react';
 import {Libre_Franklin} from 'next/font/google';
-import TypingAnimation from '@/typing-animation';
-import Ffmpeg from '@/ffmpeg';
 import {
 	Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTrigger,
-} from '@/ui/drawer';
+} from '@0n0/ui/drawer';
+import TypingAnimation from '@/typing-animation';
+import Ffmpeg from '@/ffmpeg';
 import {RadialLoader} from '@/ui/radial-loader';
 import {cn} from '~/lib/utils';
 

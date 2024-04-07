@@ -5,6 +5,8 @@
 await import('./src/env.js');
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+	transpilePackages: ['@0n0/ui'],
+};
 
 export default config;

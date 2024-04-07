@@ -1,10 +1,9 @@
 import {
 	FileArchiveIcon, FileAudioIcon, FileCodeIcon, FileIcon, FileImageIcon, FileTextIcon, FileVideoIcon, type LucideIcon,
 } from 'lucide-react';
-import {Slot} from '@radix-ui/react-slot';
 import {cva, type VariantProps} from 'class-variance-authority';
 import * as React from 'react';
-import {Button} from './ui/button';
+import {Button} from '@0n0/ui/button';
 import {type AugmentedFileType, type FileIcon as StringFileIcon} from '~/ffmpeg-util';
 import {cn} from '~/lib/utils';
 

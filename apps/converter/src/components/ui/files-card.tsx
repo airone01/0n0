@@ -4,8 +4,8 @@ import Image from 'next/image';
 import {atom, useAtom} from 'jotai';
 import {
 	Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger,
-} from './dialog';
-import {Button} from './button';
+} from '@0n0/ui/dialog';
+import {Button} from '@0n0/ui/button';
 import MyMediaPlayer from './media-player';
 import {cn} from '~/lib/utils';
 

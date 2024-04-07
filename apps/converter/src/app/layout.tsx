@@ -1,7 +1,7 @@
 import {Poppins} from 'next/font/google';
-import '~/styles/globals.css';
+import {ModeToggle} from '@0n0/ui/mode-toggle';
+import '@0n0/ui/globals.css';
 import {ThemeProvider} from '@/theme-provider';
-import {ModeToggle} from '@/ui/mode-toggle';
 
 // eslint-disable-next-line new-cap
 const poppins = Poppins({

@@ -1,8 +1,8 @@
 import {type PrimitiveAtom, useAtom} from 'jotai';
-import {Input} from './input';
+import {Input} from '@0n0/ui/input';
 import {
 	Card, CardContent, CardDescription, CardHeader, CardTitle,
-} from './card';
+} from '@0n0/ui/card';
 
 type Properties = {
 	filesAtom: PrimitiveAtom<File[]>;

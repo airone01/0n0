@@ -1,1 +1,1 @@
-export {Separator} from '@/separator/separator';
+export {Separator} from './separator';

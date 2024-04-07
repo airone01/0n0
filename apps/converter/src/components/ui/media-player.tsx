@@ -10,8 +10,8 @@ import {
 } from '@vidstack/react';
 import {useEffect, useRef} from 'react';
 import {type PrimitiveAtom, atom, useAtom} from 'jotai';
-import {Button} from './button';
-import {Popover, PopoverContent, PopoverTrigger} from './popover';
+import {Button} from '@0n0/ui/button';
+import {Popover, PopoverContent, PopoverTrigger} from '@0n0/ui/popover';
 
 type Properties = {
 	file: File;

@@ -1,1 +1,1 @@
-export {Button, type ButtonProperties} from '@/button/button';
+export {Button, type ButtonProperties} from './button';

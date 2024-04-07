@@ -1,1 +1,1 @@
-export {ModeToggle} from '@/mode-toggle/mode-toggle';
+export {ModeToggle} from './mode-toggle';

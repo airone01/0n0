@@ -4,9 +4,9 @@ import {useEffect, useRef} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {toBlobURL} from '@ffmpeg/util';
 import {type PrimitiveAtom, atom, useAtom} from 'jotai';
+import {Button} from '@0n0/ui/button';
 import FileCard from './ui/files-card';
 import InputCard from '~/components/ui/input-card';
-import {Button} from '@/ui/button';
 import {type AugmentedFileType} from '~/ffmpeg-util';
 
 function newFfmpegNoNodeError() {
