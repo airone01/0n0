@@ -72,8 +72,8 @@ importers:
         specifier: ^0.7.1
         version: 0.7.3(typescript@5.4.3)(zod@3.22.4)
       '@vidstack/react':
-        specifier: next
-        version: 1.11.6(@types/react@18.2.72)(react@18.2.0)
+        specifier: ^1.11.13
+        version: 1.11.13(@types/react@18.2.72)(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -107,9 +107,6 @@ importers:
       tailwind-merge:
         specifier: ^2.2.1
         version: 2.2.2
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
       vaul:
         specifier: ^0.8.9
         version: 0.8.9(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
@@ -117,6 +114,9 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
+      '@0n0/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       '@types/eslint':
         specifier: ^8.44.7
         version: 8.56.7
@@ -136,7 +136,7 @@ importers:
         specifier: ^6.11.0
         version: 6.21.0(eslint@8.57.0)(typescript@5.4.3)
       autoprefixer:
-        specifier: ^10.4.14
+        specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
       eslint:
         specifier: ^8.54.0
@@ -160,7 +160,7 @@ importers:
         specifier: ^23.0.5
         version: 23.0.6(typescript@5.4.3)
       tailwindcss:
-        specifier: ^3.3.5
+        specifier: ^3.4.1
         version: 3.4.1
       typescript:
         specifier: ^5.1.6
@@ -168,6 +168,18 @@ importers:
       xo:
         specifier: ^0.58.0
         version: 0.58.0(@types/eslint@8.56.7)(webpack@5.91.0)
+
+  packages/tailwind-config:
+    devDependencies:
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.19(postcss@8.4.38)
+      postcss:
+        specifier: ^8.4.31
+        version: 8.4.38
+      tailwindcss:
+        specifier: ^3.4.3
+        version: 3.4.3
 
   packages/ui:
     dependencies:
@@ -192,6 +204,9 @@ importers:
       '@swc/helpers':
         specifier: ^0.5.8
         version: 0.5.8
+      '@vidstack/react':
+        specifier: ^1.11.13
+        version: 1.11.13(@types/react@18.2.72)(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -216,10 +231,16 @@ importers:
       react-dom:
         specifier: ^17.0.0 || ^18.0.0-0
         version: 18.2.0(react@18.2.0)
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.1)
       vaul:
         specifier: ^0.8.9
         version: 0.8.9(@types/react-dom@18.2.22)(@types/react@18.2.72)(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
+      '@0n0/tailwind-config':
+        specifier: workspace:*
+        version: link:../tailwind-config
       '@types/node':
         specifier: ^18.17.0
         version: 18.19.28
@@ -2181,8 +2202,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@vidstack/react@1.11.6(@types/react@18.2.72)(react@18.2.0):
-    resolution: {integrity: sha512-PfNsckdv9uM0SqP4YphmZFKf/IscQ5nW98dgxehCvgF5MJMq+WtaQEd24MJHPZWJqRm1Z9dhHhjPkHgCLWW25g==}
+  /@vidstack/react@1.11.13(@types/react@18.2.72)(react@18.2.0):
+    resolution: {integrity: sha512-Kd3imBXJw0kjoo3e+wGhdQIScEaK95bsIirqR7ZWc+xwvlOo1Gs/jWOA/vzGm3VG7ld1fVepktyWxwThEeF4ig==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/react': ^18.0.0
@@ -7656,6 +7677,37 @@ packages:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
+
+  /tailwindcss@3.4.3:
+    resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      '@alloc/quick-lru': 5.2.0
+      arg: 5.0.2
+      chokidar: 3.6.0
+      didyoumean: 1.2.2
+      dlv: 1.1.3
+      fast-glob: 3.3.2
+      glob-parent: 6.0.2
+      is-glob: 4.0.3
+      jiti: 1.21.0
+      lilconfig: 2.1.0
+      micromatch: 4.0.5
+      normalize-path: 3.0.0
+      object-hash: 3.0.0
+      picocolors: 1.0.0
+      postcss: 8.4.38
+      postcss-import: 15.1.0(postcss@8.4.38)
+      postcss-js: 4.0.1(postcss@8.4.38)
+      postcss-load-config: 4.0.2(postcss@8.4.38)
+      postcss-nested: 6.0.1(postcss@8.4.38)
+      postcss-selector-parser: 6.0.16
+      resolve: 1.22.8
+      sucrase: 3.35.0
+    transitivePeerDependencies:
+      - ts-node
+    dev: true
 
   /tapable@0.1.10:
     resolution: {integrity: sha512-jX8Et4hHg57mug1/079yitEKWGB3LCwoxByLsNim89LABq8NqgiX+6iYVOsq0vX8uJHkU+DZ5fnq95f800bEsQ==}

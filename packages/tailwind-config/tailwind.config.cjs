@@ -1,16 +1,11 @@
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable @typescript-eslint/naming-convention */
-import type {Config} from 'tailwindcss';
-
-const config = {
-	darkMode: ['class'],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
 	content: [
-		'./pages/**/*.{ts,tsx}',
-		'./components/**/*.{ts,tsx}',
-		'./app/**/*.{ts,tsx}',
-		'./src/**/*.{ts,tsx}',
+		'./src/**/*.{html,js,ts,jsx,tsx}', // current app, depending on where tailwind in run in the context
+		'../../packages/ui/src/**/*.{html,js,ts,jsx,tsx}', // @0n0/ui
 	],
+	darkMode: ['class'],
+	mode: 'jit',
 	prefix: '',
 	theme: {
 		container: {
@@ -63,12 +58,12 @@ const config = {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {height: '0'},
-					to: {height: 'var(--radix-accordion-content-height)'},
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' },
 				},
 				'accordion-up': {
-					from: {height: 'var(--radix-accordion-content-height)'},
-					to: {height: '0'},
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' },
 				},
 			},
 			animation: {
@@ -78,6 +73,4 @@ const config = {
 		},
 	},
 	plugins: [require('tailwindcss-animate'), require('@vidstack/react/tailwind.cjs')],
-} satisfies Config;
-
-export default config;
+}
