@@ -6,6 +6,10 @@
   "type": "module",
   "packageManager": "pnpm@8.15.4",
   "sideEffects": false,
+  "scripts": {
+    "lint": "xo",
+    "lint:fix": "xo --fix"
+  },
   "exports": {
     "./lib": "./src/lib/index.ts",
     "./lib/themes": "./src/lib/themes.ts",
@@ -47,6 +51,7 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@swc/helpers": "^0.5.8",
     "@vidstack/react": "^1.11.13",
     "class-variance-authority": "^0.7.0",

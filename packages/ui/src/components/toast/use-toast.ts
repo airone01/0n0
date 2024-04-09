@@ -4,7 +4,7 @@ import {atom, useAtom} from 'jotai';
 import type {
 	ToastActionElement,
 	ToastProps,
-} from '@/ui/toast';
+} from './toast';
 
 const TOAST_LIMIT = 1; // eslint-disable-line @typescript-eslint/naming-convention
 const TOAST_REMOVE_DELAY = 1_000_000; // eslint-disable-line @typescript-eslint/naming-convention

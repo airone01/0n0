@@ -13,7 +13,8 @@
   "scripts": {
     "prepare": "husky",
     "commitlint": "commitlint --edit",
-    "commit": "cz"
+    "commit": "cz",
+    "turbo": "turbo"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
@@ -23,7 +24,8 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.0.11",
     "inquirer": "^9.2.17",
-    "turbo": "^1.13.2"
+    "turbo": "^1.13.2",
+    "xo": "^0.58.0"
   },
   "config": {
     "commitizen": {

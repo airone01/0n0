@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
-		'./src/**/*.{html,js,ts,jsx,tsx}', // current app, depending on where tailwind in run in the context
+		'./src/**/*.{html,js,ts,jsx,tsx}', // Current app, depending on where tailwind in run in the context
 		'../../packages/ui/src/**/*.{html,js,ts,jsx,tsx}', // @0n0/ui
 	],
 	darkMode: ['class'],
@@ -58,12 +58,12 @@ module.exports = {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: { height: '0' },
-					to: { height: 'var(--radix-accordion-content-height)' },
+					from: {height: '0'},
+					to: {height: 'var(--radix-accordion-content-height)'},
 				},
 				'accordion-up': {
-					from: { height: 'var(--radix-accordion-content-height)' },
-					to: { height: '0' },
+					from: {height: 'var(--radix-accordion-content-height)'},
+					to: {height: '0'},
 				},
 			},
 			animation: {
@@ -73,4 +73,4 @@ module.exports = {
 		},
 	},
 	plugins: [require('tailwindcss-animate'), require('@vidstack/react/tailwind.cjs')],
-}
+};
