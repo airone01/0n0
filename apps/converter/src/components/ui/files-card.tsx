@@ -6,8 +6,8 @@ import {
 	Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger,
 } from '@0n0/ui/dialog';
 import {Button} from '@0n0/ui/button';
+import {cn} from '@0n0/ui/lib/utils';
 import MyMediaPlayer from './media-player';
-import {cn} from '~/lib/utils';
 
 const widthHeightAtom = atom<[number | undefined, number | undefined]>([undefined, undefined]);
 

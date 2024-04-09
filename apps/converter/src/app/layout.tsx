@@ -1,6 +1,7 @@
 import {Poppins} from 'next/font/google';
 import {ModeToggle} from '@0n0/ui/mode-toggle';
 import '@0n0/ui/globals.css';
+import {themes} from '@0n0/ui/lib/themes';
 import {ThemeProvider} from '@/theme-provider';
 
 // eslint-disable-next-line new-cap
@@ -25,8 +26,9 @@ export default function RootLayout({
 			<body className={`${poppins.className} flex flex-col min-h-screen antialiased bg-background text-foreground`}>
 				<ThemeProvider
 					attribute='class'
-					defaultTheme='system'
-					enableSystem
+					defaultTheme='orange-dark'
+					themes={[...themes]}
+					disableTransitionOnChange
 				>
 					<nav className='grow-0 flex flex-row-reverse p-2'>
 						<ModeToggle />

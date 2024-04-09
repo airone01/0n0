@@ -7,12 +7,10 @@
   "packageManager": "pnpm@8.15.4",
   "sideEffects": false,
   "exports": {
-    "./tailwind": {
-      "require": "./src/tailwind.cjs"
-    },
-    "./utils": "./src/lib/utils.ts",
+    "./lib": "./src/lib/index.ts",
+    "./lib/themes": "./src/lib/themes.ts",
+    "./lib/utils": "./src/lib/utils.ts",
     "./globals.css": "./src/styles/globals.css",
-    ".": "./src/index.ts",
     "./button": "./src/components/button/index.ts",
     "./card": "./src/components/card/index.ts",
     "./carousel": "./src/components/carousel/index.ts",
@@ -54,6 +52,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.1.1",
     "embla-carousel-react": "^8.0.0-rc22",
+    "jotai": "^2.6.4",
     "lucide-react": "^0.316.0",
     "next-themes": "^0.2.1",
     "tailwindcss-animate": "^1.0.7",

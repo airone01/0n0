@@ -7,10 +7,10 @@ import {Libre_Franklin} from 'next/font/google';
 import {
 	Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTrigger,
 } from '@0n0/ui/drawer';
+import {cn} from '@0n0/ui/lib/utils';
 import TypingAnimation from '@/typing-animation';
 import Ffmpeg from '@/ffmpeg';
 import {RadialLoader} from '@/ui/radial-loader';
-import {cn} from '~/lib/utils';
 
 const percentAtom = atom(0);
 const ffmpegMessagesAtom = atom<string[]>([]);

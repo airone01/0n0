@@ -4,8 +4,8 @@ import {
 import {cva, type VariantProps} from 'class-variance-authority';
 import * as React from 'react';
 import {Button} from '@0n0/ui/button';
+import {cn} from '@0n0/ui/lib/utils';
 import {type AugmentedFileType, type FileIcon as StringFileIcon} from '~/ffmpeg-util';
-import {cn} from '~/lib/utils';
 
 function nameToIcon(name: StringFileIcon): LucideIcon {
 	switch (name) {
