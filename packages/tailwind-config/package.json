@@ -1,6 +1,6 @@
 {
   "name": "@0n0/tailwind-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Configurations for 0n0",
   "packageManager": "pnpm@8.15.4",
   "scripts": {
