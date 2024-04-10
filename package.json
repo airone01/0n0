@@ -11,9 +11,11 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky",
+    "ci:publish": "pnpm publish -r",
+    "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add .",
     "commitlint": "commitlint --edit",
     "commit": "cz",
+    "prepare": "husky",
     "turbo": "turbo"
   },
   "devDependencies": {
@@ -21,6 +23,8 @@
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
     "commitizen": "^4.3.0",
+    "conventional-changelog": "^5.1.0",
+    "conventional-changelog-cli": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.0.11",
     "inquirer": "^9.2.17",

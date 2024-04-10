@@ -43,3 +43,6 @@ yarn-error.log*
 
 # turborepo
 /**/.turbo/
+
+# pnpm
+/**/.pnpm-store/
