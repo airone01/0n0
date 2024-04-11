@@ -28,7 +28,7 @@ jobs:
         with:
           version: 8
       - name: Setup npmrc
-        run: echo "//ghcr.io/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+        run: echo "//ghcr.io/:_authToken=${{ secrets.GH_TOKEN }}" > .npmrc
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: Install Dependencies
@@ -42,4 +42,4 @@ jobs:
           title: "chore: update versions"
           publish: pnpm ci:publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
