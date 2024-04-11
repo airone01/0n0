@@ -1,0 +1,75 @@
+{
+  "name": "@0n0/ui",
+  "version": "0.1.0",
+  "description": "UI components for 0n0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@8.15.4",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "xo",
+    "lint:fix": "xo --fix"
+  },
+  "exports": {
+    "./lib": "./src/lib/index.ts",
+    "./lib/themes": "./src/lib/themes.ts",
+    "./lib/utils": "./src/lib/utils.ts",
+    "./globals.css": "./src/styles/globals.css",
+    "./button": "./src/components/button/index.ts",
+    "./card": "./src/components/card/index.ts",
+    "./carousel": "./src/components/carousel/index.ts",
+    "./dialog": "./src/components/dialog/index.ts",
+    "./drawer": "./src/components/drawer/index.ts",
+    "./dropdown-menu": "./src/components/dropdown-menu/index.ts",
+    "./input": "./src/components/input/index.ts",
+    "./label": "./src/components/label/index.ts",
+    "./mode-toggle": "./src/components/mode-toggle/index.ts",
+    "./popover": "./src/components/popover/index.ts",
+    "./separator": "./src/components/separator/index.ts",
+    "./toast": "./src/components/toast/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "typesVersions": {
+    "*": {
+      "*": [
+        "src/*",
+        "src/*/index"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "next": "*",
+    "react": "^17.0.0 || ^18.0.0-0",
+    "react-dom": "^17.0.0 || ^18.0.0-0"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-separator": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
+    "@swc/helpers": "^0.5.8",
+    "@vidstack/react": "^1.11.13",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^1.1.1",
+    "embla-carousel-react": "^8.0.0-rc22",
+    "jotai": "^2.6.4",
+    "lucide-react": "^0.316.0",
+    "next-themes": "^0.2.1",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.8.9"
+  },
+  "devDependencies": {
+    "@0n0/tailwind-config": "workspace:*",
+    "@types/node": "^18.17.0",
+    "@types/react": "^18.2.37",
+    "tailwind-merge": "^2.2.2",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.1.6",
+    "xo": "^0.58.0"
+  }
+}

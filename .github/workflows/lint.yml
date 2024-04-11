@@ -1,0 +1,68 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  xo:
+    name: Lint code with xo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.11"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Print versions
+        run: |
+          git --version
+          node --version
+          npm --version
+          pnpm --version
+          pnpx xo --version
+      - name: Install deps
+        run: |
+          pnpm i
+      - name: Lint repo
+        run: |
+          pnpm run turbo lint
+
+  commitlint:
+    name: Lint commits with commitlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.11"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Print versions
+        run: |
+          git --version
+          node --version
+          npm --version
+          pnpm --version
+          pnpx commitlint --version
+      - name: Install commitlint
+        run: |
+          pnpm add -w conventional-changelog-conventionalcommits
+          pnpm add -w commitlint@latest
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push'
+        run: pnpx commitlint --last --verbose
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request'
+        run: pnpx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
