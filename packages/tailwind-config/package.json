@@ -1,0 +1,19 @@
+{
+  "name": "@0n0/tailwind-config",
+  "version": "0.0.0",
+  "description": "Configurations for 0n0",
+  "packageManager": "pnpm@8.15.4",
+  "scripts": {
+    "lint": "xo",
+    "lint:fix": "xo --fix"
+  },
+  "files": [
+    "tailwind.config.js"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.3",
+    "xo": "^0.58.0"
+  }
+}
