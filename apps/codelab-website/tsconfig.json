@@ -35,7 +35,7 @@
         "./src/*"
       ],
       "@/*": [
-        "./src/components/*"
+        "./src/app/_components/*"
       ],
       "@globals": [
         "./src/styles/globals.css"

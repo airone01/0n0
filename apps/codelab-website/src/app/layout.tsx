@@ -1,5 +1,6 @@
 import {type Metadata} from 'next';
 import {GeistSans} from 'geist/font/sans';
+import {ClerkProvider} from '@clerk/nextjs';
 import '~/styles/globals.css';
 import {TRPCReactProvider} from '~/trpc/react';
 import Header from '@/header';
@@ -14,11 +15,13 @@ export default function RootLayout({
   children,
 }: Readonly<{children: React.ReactNode}>) {
   return (
-    <html lang='en' className={`${GeistSans.variable}`}>
-      <body className=''>
-        <Header />
-        <TRPCReactProvider>{children}</TRPCReactProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en' className={`${GeistSans.variable}`}>
+        <body className=''>
+          <Header />
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -1,10 +1,10 @@
-# editorconfig.org
+# https://editorconfig.org
 root = true
 
-[*.{js,ts,jsx,tsx}]
+[*.{js,ts,jsx,tsx,astro,vue}]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
-indent_style = tab
+indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true

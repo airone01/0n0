@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "repository": "https://github.com/AirOne01/0n0.git",
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@9.6.0",
   "workspaces": [
     "docs",
     "apps/*",
@@ -19,16 +19,16 @@
     "turbo": "turbo"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.1",
-    "@commitlint/cli": "^19.2.1",
-    "@commitlint/config-conventional": "^19.1.0",
+    "@changesets/cli": "^2.27.7",
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "commitizen": "^4.3.0",
     "conventional-changelog": "^5.1.0",
     "conventional-changelog-cli": "^4.1.0",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^9.0.11",
-    "inquirer": "^9.2.17",
-    "turbo": "^1.13.2",
+    "husky": "^9.1.4",
+    "inquirer": "^9.3.6",
+    "turbo": "^1.13.4",
     "xo": "^0.58.0"
   },
   "config": {
