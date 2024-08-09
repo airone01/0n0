@@ -26,7 +26,8 @@
     "./mode-toggle": "./src/components/mode-toggle/index.ts",
     "./popover": "./src/components/popover/index.ts",
     "./separator": "./src/components/separator/index.ts",
-    "./toast": "./src/components/toast/index.ts"
+    "./toast": "./src/components/toast/index.ts",
+    "./tooltip": "./src/components/tooltip/index.ts"
   },
   "files": [
     "src"
@@ -52,6 +53,7 @@
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "@swc/helpers": "^0.5.12",
     "@vidstack/react": "^1.12.5",
     "class-variance-authority": "^0.7.0",
